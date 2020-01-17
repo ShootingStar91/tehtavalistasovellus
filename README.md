@@ -4,7 +4,7 @@ Tehtävälistasovellus on web-sivustolla toimiva sovellus, johon käyttäjä kir
 
 Omia tehtäviä voi myös tarkastella sovelluksessa. Niitä voi järjestää ja näyttää ominaisuuksien mukaan. Esimerkiksi käyttäjä voi katsoa sellaiset tehtävät joita ei olla vielä tehty ja joiden päivämäärä on vaikkapa seuraavan viikon sisällä, tai sellaiset tehtävät joiden aiheissa on "koulu".
 
-##### Toimintoja:
+### Toimintoja:
 
 + Tehtävän lisääminen
 ..+ Useita aiheita yhdelle tehtävälle
