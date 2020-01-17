@@ -1,0 +1,2 @@
+# tehtavalistasovellus
+Tehtävälistasovellus, tietokantasovelluksen harjoitustyö
