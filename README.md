@@ -13,3 +13,5 @@ Omia tehtäviä voi myös tarkastella sovelluksessa. Niitä voi järjestää ja 
   + Näytettävien tehtävien järjestäminen
 + Tehtävän merkitseminen tehdyksi
 + Tehtävän muokkaaminen (päivämäärän siirtäminen, kuvauksen muuttaminen)
+
+Tietokantakaavio: https://github.com/ShootingStar91/tehtavalistasovellus/blob/master/tehtavalistasovellus.png
