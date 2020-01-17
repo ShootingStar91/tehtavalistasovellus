@@ -7,9 +7,9 @@ Omia tehtäviä voi myös tarkastella sovelluksessa. Niitä voi järjestää ja 
 ### Toimintoja:
 
 + Tehtävän lisääminen
-..+ Useita aiheita yhdelle tehtävälle
+  + Useita aiheita yhdelle tehtävälle
 + Tehtävien katselu
-..+ Tehtävien suodattaminen kriteerien mukaan (esim. aihe tai päivämäärä)
-..+ Näytettävien tehtävien järjestäminen
+  + Tehtävien suodattaminen kriteerien mukaan (esim. aihe tai päivämäärä)
+  + Näytettävien tehtävien järjestäminen
 + Tehtävän merkitseminen tehdyksi
 + Tehtävän muokkaaminen (päivämäärän siirtäminen, kuvauksen muuttaminen)
