@@ -8,6 +8,7 @@ Omia tehtäviä voi myös tarkastella sovelluksessa. Niitä voi järjestää ja 
 
 + Tehtävän lisääminen
   + Useita aiheita yhdelle tehtävälle
+  + Aiheen voi tehtävää lisättäessä valita joko aiemmista itse lisäämistä aiheista, tai luoda uuden. Aiheet näkyvät vain itselle.
 + Tehtävien katselu
   + Tehtävien suodattaminen kriteerien mukaan (esim. aihe tai päivämäärä)
   + Näytettävien tehtävien järjestäminen
