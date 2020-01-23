@@ -11,9 +11,9 @@ Omia tehtäviä voi myös tarkastella sovelluksessa. Niitä voi järjestää ja 
   + Aiheen voi tehtävää lisättäessä valita joko aiemmista itse lisäämistä aiheista, tai luoda uuden. Aiheet näkyvät vain itselle.
 + Tehtävien katselu
   + Tehtävien suodattaminen kriteerien mukaan (esim. aihe tai päivämäärä)
-  + Näytettävien tehtävien järjestäminen
+  + Näytettävien tehtävien järjestäminen vaikkapa prioriteetin tai aiheen mukaan
 + Tehtävän merkitseminen tehdyksi
-+ Tehtävän muokkaaminen (päivämäärän siirtäminen, kuvauksen muuttaminen)
++ Tehtävän muokkaaminen (päivämäärän siirtäminen, kuvauksen tai prioriteetin muuttaminen)
 + Tunnuksen luominen, sisäänkirjautuminen
 + Käyttäjätunnuksen poistaminen, jolloin kaikki tunnuksen tehtävät poistuvat tietokannasta
 
