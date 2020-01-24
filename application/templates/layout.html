@@ -3,14 +3,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>TodoApp</title>
+    <title>Tehtävälistasovellus</title>
   </head>
 
   <body>
+    <ul>
+      <li><a href="{{ url_for('tehtava_index') }}">Listaa tehtävät</a></li>
+      <li><a href="{{ url_for('tehtava_lomake') }}">Lisää uusi tehtävä</a></li>
+    </ul>
+
     {% block body %}
-      <p>
-        Content.
-      </p>
+    <p>Content.</p> 
     {% endblock %}
   </body>
 </html>
