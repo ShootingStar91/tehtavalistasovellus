@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Tehtävä</th>
+      <th>Valmis</th>
+    </tr>
+    {% for t in tehtavat %}
+    <tr>
+      <td>{{ t.nimi }}</td>
+      <td>{{ t.valmis }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('tehtava_valmis', tehtava_id=t.id) }}">
+            <input type="submit" value="Aseta tehtävä tehdyksi"/>
+          </form>              
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

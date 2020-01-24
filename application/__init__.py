@@ -13,6 +13,7 @@ db = SQLAlchemy(app)
 from application import views
 
 from application.tehtava import models
+from application.tehtava import views
 
 db.create_all()
 
