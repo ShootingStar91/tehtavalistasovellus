@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for
 
 from application import app
 from application.auth.models import User
-from application.auth.forms import LoginForm
+from application.templates.auth.forms import KirjautumisLomake
 
 @app.route("/auth/login", methods = ["GET", "POST"])
 def auth_login():
