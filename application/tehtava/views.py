@@ -23,7 +23,14 @@ def tehtava_valmis(tehtava_id):
 
 @app.route("/tehtava/", methods=["POST"])
 def tehtava_luo():
+
+    form = TehtavaLomake(request.form)
+
+    if not form.validate():
+        return render_template("tehtava/uusi.html", form = form)
+
     t = Tehtava(request.form.get("nimi"))
+    t.valmis = form.valmis.data
 
     db.session().add(t)
     db.session().commit()
