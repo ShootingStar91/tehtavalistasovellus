@@ -28,7 +28,7 @@ Omia tehtäviä voi myös tarkastella sovelluksessa. Niitä voi järjestää ja 
 + [Projektin tila](https://github.com/ShootingStar91/tehtavalistasovellus/blob/master/documentation/projektin_tila.md)
 + [Käyttötapaukset](https://github.com/ShootingStar91/tehtavalistasovellus/blob/master/documentation/kayttotapaukset.md)
 
-+ Tietokantakaavio
++ Tietokantakaavio:
 
 ![Tietokantakaavio (tehtävälistasovellus)](
 https://github.com/ShootingStar91/tehtavalistasovellus/blob/master/documentation/tietokantakaavio.png
