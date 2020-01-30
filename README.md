@@ -33,4 +33,3 @@ Omia tehtäviä voi myös tarkastella sovelluksessa. Niitä voi järjestää ja 
 ![Tietokantakaavio (tehtävälistasovellus)](
 https://github.com/ShootingStar91/tehtavalistasovellus/blob/master/documentation/tietokantakaavio.png
  "Tietokantakaavio")
-

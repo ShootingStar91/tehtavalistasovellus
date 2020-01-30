@@ -1,7 +1,7 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
 from application.tehtava.models import Tehtava
-
+from application.tehtava.forms import TehtavaLomake
 
 
 @app.route("/tehtava", methods=["GET"])
@@ -10,7 +10,7 @@ def tehtava_index():
 
 @app.route("/tehtava/uusi/")
 def tehtava_lomake():
-    return render_template("tehtava/uusi.html")
+    return render_template("tehtava/uusi.html", form = TehtavaLomake())
 
 @app.route("/tehtava/<tehtava_id>/", methods=["POST"])
 def tehtava_valmis(tehtava_id):
