@@ -2,23 +2,49 @@
 
 Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tilasta.
 
-Osat 1 ja 2 ovat valmiit. Sovellus on herokussa. Tehtava-tietokantataulu toteuttaa tässä vaiheessa vasta kaksi näkyvää saraketta, eli nimi- ja valmis-sarakkeet, sekä lisäksi taulun pääavaimen (id), muttei muuta.
+Osan 3 vaatimukset valmiit.
 
++ Rekisteröityminen, kirjautuminen
++ Tehtävän CRUD: Luominen, listaaminen, muokkaaminen ja poistaminen
+  + Muokkaaminen tarkoittaa tässä vaiheessa vain tehtävän merkkaamista tehdyksi
+  + Tehtävän voi poistaa "poista"-linkistä tehtävien listauksessa
++ Tehtävillä ei ole vielä päivämääräominaisuutta.
++ Vain kaksi taulua toistaiseksi: kayttaja ja tehtava.
++ Aiemmin suunnittelemani prioriteetti-ominaisuus poistettu.
+  + Ei kuulunut niin hyvin sovelluksen ajatukseen, joka kehittyi viime viikon käyttäjäkertomuksia kirjoittaessa.
 
 ### Projektin nykyinen rakenne
 
-+ Kansio: tehtavalistasovellus
-  + run.py
+**Kansiot** lihavoituna, *python-tiedostot* kursivoituna
+
++ **tehtavalistasovellus**
+  + *run.py*
   + README.md
   + Procfile
   + requirements.txt
-  + Kansio: application
+  + **application**
     + tehtava.db
-    + views.py
-    + Kansio: tehtava
+    + *views.py*
+    + **tehtava**
+      + *models.py*
+      + *views.py*
+      + *forms.py*
+    + **auth**
       + models.py
       + views.py
-  + Kansio: documentation
+    + **templates**
+      + index.html
+      + layout.html
+      + **auth**
+        + *forms.py*
+        + kirjautumislomake.html
+        + rekisteroitymislomake.html
+      + **tehtava**
+        + list.html
+        + uusi.html
+  + *documentation*
     + kayttotapaukset.md
     + projektin_tila.md
     + tietokantakaavio.png
+
+
