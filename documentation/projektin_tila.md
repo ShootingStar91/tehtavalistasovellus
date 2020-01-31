@@ -30,8 +30,8 @@ Osan 3 vaatimukset valmiit.
       + *views.py*
       + *forms.py*
     + **auth**
-      + models.py
-      + views.py
+      + *models.py*
+      + *views.py*
     + **templates**
       + index.html
       + layout.html
@@ -42,7 +42,7 @@ Osan 3 vaatimukset valmiit.
       + **tehtava**
         + list.html
         + uusi.html
-  + *documentation*
+  + **documentation**
     + kayttotapaukset.md
     + projektin_tila.md
     + tietokantakaavio.png
