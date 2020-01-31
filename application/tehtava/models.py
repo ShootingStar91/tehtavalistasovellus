@@ -7,7 +7,9 @@ class Tehtava(db.Model):
     nimi = db.Column(db.String(144), nullable=False)
     kuvaus = db.Column(db.TEXT, nullable=True)
     valmis = db.Column(db.Boolean, nullable=False)
-    prioriteetti = db.Column(db.Integer)
+    kayttajaid = db.Column(db.Integer, db.ForeignKey('kayttaja.id'), 
+                            nullable=False)
+
 
     def __init__(self, nimi):
         self.nimi = nimi

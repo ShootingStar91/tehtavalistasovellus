@@ -3,7 +3,7 @@ from application import db
 
 
 
-class User(db.Model):
+class Kayttaja(db.Model):
 
     __tablename__ = "kayttaja"
 
@@ -13,10 +13,13 @@ class User(db.Model):
     tunnus = db.Column(db.String(144), nullable=False)
     salasana = db.Column(db.String(144), nullable=False)
 
+    tehtavat = db.relationship("Tehtava", backref='kayttaja', lazy=True)
+
     def __init__(self, nimi, tunnus, salasana):
         self.nimi = nimi
-        self.tunnus = tunnus
-        self.salasana = salasana
+       # En ole varma onko nämä tarpeelliset
+       # self.tunnus = tunnus
+       # self.salasana = salasana
 
     def get_id(self):
         return self.id

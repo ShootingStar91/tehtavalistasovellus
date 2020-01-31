@@ -7,6 +7,14 @@
   </head>
 
   <body>
+    {% if current_user.is_authenticated %}
+    <p> <a href="{{url_for('auth_uloskirjaudu') }}">Kirjaudu ulos</a>
+      Kirjautunut nimellä {{ current_user.nimi }}
+    </p>
+    {% else %}
+    <a href="{{url_for('auth_kirjaudu') }}">Kirjaudu</a>
+    {% endif %}
+
     <ul>
       <li><a href="{{ url_for('tehtava_index') }}">Listaa tehtävät</a></li>
       <li><a href="{{ url_for('tehtava_lomake') }}">Lisää uusi tehtävä</a></li>
