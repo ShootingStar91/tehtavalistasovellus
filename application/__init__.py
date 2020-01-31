@@ -38,7 +38,7 @@ login_manager.login_view = "auth_kirjaudu"
 login_manager.login_message = "Kirjaudu sisään käyttääksesi tätä toimintoa."
 
 @login_manager.user_loader
-def load_user(user_id):
+def lataa_kayttaja(user_id):
     return Kayttaja.query.get(user_id)
 
 try:

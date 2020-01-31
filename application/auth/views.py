@@ -1,9 +1,9 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
 
-from application import app
+from application import app, db
 from application.auth.models import Kayttaja
-from application.templates.auth.forms import KirjautumisLomake
+from application.templates.auth.forms import KirjautumisLomake, RekisteroitymisLomake
 
 @app.route("/auth/kirjaudu", methods = ["GET", "POST"])
 def auth_kirjaudu():
@@ -26,6 +26,19 @@ def auth_kirjaudu():
 
     return redirect(url_for("index"))
 
+@app.route("/auth/rekisteroidy", methods = ["GET", "POST"])
+def auth_rekisteroidy():
+    if request.method == "GET":
+        return render_template("auth/rekisteroitymislomake.html", form = RekisteroitymisLomake())
+
+    form = RekisteroitymisLomake(request.form)
+
+    uusiKayttaja = Kayttaja(form.nimi.data, form.tunnus.data, form.salasana.data)
+
+    db.session().add(uusiKayttaja)
+    db.session().commit()
+
+    return redirect(url_for("index"))
 
 @app.route("/auth/uloskirjaudu")
 def auth_uloskirjaudu():

@@ -6,6 +6,7 @@ from application.tehtava.forms import TehtavaLomake
 
 
 @app.route("/tehtava", methods=["GET"])
+@login_required
 def tehtava_index():
     return render_template("tehtava/list.html", tehtavat = Tehtava.query.all())
 
@@ -41,3 +42,14 @@ def tehtava_luo():
     db.session().commit()
 
     return redirect(url_for("tehtava_index"))
+
+@app.route("/tehtava/poista/<tehtava_id>")
+@login_required
+def tehtava_poista(tehtava_id):
+
+    tehtava = db.session.query(Tehtava).filter(Tehtava.id==tehtava_id).first()
+    db.session.delete(tehtava)
+    db.session().commit()
+
+    return redirect(url_for("tehtava_index"))
+

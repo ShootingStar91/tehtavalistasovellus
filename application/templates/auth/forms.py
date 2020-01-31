@@ -7,3 +7,13 @@ class KirjautumisLomake(FlaskForm):
 
     class Meta:
         csrf = False
+
+class RekisteroitymisLomake(FlaskForm):
+    nimi = StringField("Nimi")
+    tunnus = StringField("Tunnus")
+    salasana = PasswordField("Salasana")
+
+    class Meta:
+        csrf = False
+
+

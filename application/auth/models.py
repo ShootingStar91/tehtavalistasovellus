@@ -17,9 +17,8 @@ class Kayttaja(db.Model):
 
     def __init__(self, nimi, tunnus, salasana):
         self.nimi = nimi
-       # En ole varma onko nämä tarpeelliset
-       # self.tunnus = tunnus
-       # self.salasana = salasana
+        self.tunnus = tunnus
+        self.salasana = salasana
 
     def get_id(self):
         return self.id
