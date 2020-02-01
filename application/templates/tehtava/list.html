@@ -6,17 +6,21 @@
       <th>Tehtävä</th>
       <th>Valmis</th>
     </tr>
+    {% if tehtavat is defined %}
     {% for t in tehtavat %}
     <tr>
       <td>{{ t.nimi }}</td>
+      <td>{{ t.pvm }}</td>
+      <td>{{ t.kuvaus }}</td>
       <td>{{ t.valmis }}</td>
       <td><a href="{{url_for('tehtava_poista', tehtava_id=t.id) }}">Poista</a></td>
       <td>
         <form method="POST" action="{{ url_for('tehtava_valmis', tehtava_id=t.id) }}">
             <input type="submit" value="Aseta tehtävä tehdyksi"/>
-          </form>              
+          </form>
       </td>
     </tr>
     {% endfor %}
+    {% endif %}
   </table>
 {% endblock %}

@@ -15,11 +15,11 @@ class TehtavaAihe(db.Model):
     __tablename__ = "tehtavaaihe"
 
     id        = db.Column(db.Integer, primary_key=True)
-    tehtavaid = db.Column(db.Integer)
-    aiheid    = db.Column(db.Integer)
+    tehtavaid = db.Column(db.Integer, db.ForeignKey('tehtava.id'))
+    aiheid    = db.Column(db.Integer, db.ForeignKey('aihe.id'))
 
-    tehtava = db.relationship("Tehtava", backref='tehtavaaihe', lazy=True)
-    aihe    = db.relationship("Aihe",    backref='tehtavaaihe', lazy=True)
+    liitostehtava = db.relationship("Tehtava", backref='tehtavaaihe', lazy=True)
+    liitosaihe    = db.relationship("Aihe",    backref='tehtavaaihe', lazy=True)
 
 
     def __init__(self, tehtavaid, aiheid):

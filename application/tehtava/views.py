@@ -3,12 +3,16 @@ from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 from application.tehtava.models import Tehtava
 from application.tehtava.forms import TehtavaLomake
-
+from application.auth.models import Kayttaja
 
 @app.route("/tehtava", methods=["GET"])
 @login_required
 def tehtava_index():
-    return render_template("tehtava/list.html", tehtavat = Tehtava.query.all())
+
+    return render_template("tehtava/list.html", tehtavat=Kayttaja.hae_tehtavat(current_user.id))
+
+   # vanha tehtävälistaus
+   # return render_template("tehtava/list.html", tehtavat = Tehtava.query.all())
 
 @app.route("/tehtava/uusi/")
 @login_required

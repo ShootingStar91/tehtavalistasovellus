@@ -22,6 +22,8 @@ from application.tehtava import views
 from application.auth import models
 from application.auth import views
 
+from application.aihe import models
+
 
 
 # Kirjautuminen
