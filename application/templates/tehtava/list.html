@@ -10,8 +10,6 @@
     {% for t in tehtavat %}
     <tr>
       <td>{{ t.nimi }}</td>
-      <td>{{ t.pvm }}</td>
-      <td>{{ t.kuvaus }}</td>
       <td>{{ t.valmis }}</td>
       <td><a href="{{url_for('tehtava_poista', tehtava_id=t.id) }}">Poista</a></td>
       <td>
