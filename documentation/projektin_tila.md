@@ -23,6 +23,8 @@ Osan 3 vaatimukset valmiit.
   + Procfile
   + requirements.txt
   + **application**
+    + *__init__.py*
+    + *models.py*
     + tehtava.db
     + *views.py*
     + **tehtava**
@@ -32,6 +34,8 @@ Osan 3 vaatimukset valmiit.
     + **auth**
       + *models.py*
       + *views.py*
+    + **aihe**
+      + *models.py*
     + **templates**
       + index.html
       + layout.html
