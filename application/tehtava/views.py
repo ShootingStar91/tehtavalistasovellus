@@ -9,7 +9,11 @@ from application.auth.models import Kayttaja
 @login_required
 def tehtava_index():
 
-    return render_template("tehtava/list.html", tehtavat=Kayttaja.hae_tehtavat(current_user.id))
+    tehtavalista = Kayttaja.hae_tehtavat(current_user.id)
+    if len(tehtavalista) == 0:
+        return render_template("tehtava/list.html")
+
+    return render_template("tehtava/list.html", tehtavat=tehtavalista)
 
    # vanha tehtävälistaus
    # return render_template("tehtava/list.html", tehtavat = Tehtava.query.all())
