@@ -2,16 +2,14 @@
 
 Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tilasta.
 
-Osan 3 vaatimukset valmiit.
+**Tilanne viikon 4 kohdalla**
 
-+ Rekisteröityminen, kirjautuminen
-+ Tehtävän CRUD: Luominen, listaaminen, muokkaaminen ja poistaminen
-  + Muokkaaminen tarkoittaa tässä vaiheessa vain tehtävän merkkaamista tehdyksi
-  + Tehtävän voi poistaa "poista"-linkistä tehtävien listauksessa
-+ Tehtävillä ei ole vielä päivämääräominaisuutta.
-+ Vain kaksi taulua toistaiseksi: kayttaja ja tehtava.
-+ Aiemmin suunnittelemani prioriteetti-ominaisuus poistettu.
-  + Ei kuulunut niin hyvin sovelluksen ajatukseen, joka kehittyi viime viikon käyttäjäkertomuksia kirjoittaessa.
++ Tehtävään voi lisätä aiheita pilkulla eroteltuna
+  + Esimerkiksi: koulu,matematiikka,tentti
+  + Aiheita ei voi kuitenkaan herokussa katsoa. Paikallisesti toimii jo ominaisuus, jossa tilastot-sivun kautta pystyy katsomaan omat lisätyt aiheet. Tämä ei kuitenkaan toimi jostain syystä Herokussa.
+  + Ongelma liittynee monesta moneen -taulun toteutukseen jotenkin.
++ Herokussa pystyy näkemään yhteenvetokyselyn tuloksen, eli listauksen käyttäjistä, joilla on vähintään 1 tehtävä sovelluksessa.
+
 
 ### Projektin nykyinen rakenne
 
@@ -46,6 +44,9 @@ Osan 3 vaatimukset valmiit.
       + **tehtava**
         + list.html
         + uusi.html
+        + tilastot.html
+        + listaa_aiheet.html
+        + listaa_kayttajat.html
   + **documentation**
     + kayttotapaukset.md
     + projektin_tila.md
