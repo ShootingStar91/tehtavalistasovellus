@@ -78,3 +78,9 @@ def tilastot_index():
 def listaa_aiheet():
     aiheet = Kayttaja.hae_aiheet(current_user.id)
     return render_template("tehtava/listaa_aiheet.html", aiheet=aiheet)
+
+@app.route("/tehtava/listaa_kayttajat/", methods=["GET"])
+def listaa_kayttajat_joilla_tehtavia():
+    tulos = Kayttaja.hae_kayttajat_joilla_tehtavia()
+
+    return render_template("tehtava/listaa_kayttajat.html", kayttajat=tulos)

@@ -46,6 +46,19 @@ class Kayttaja(Pohja):
 
         return aiheet
 
+    @staticmethod
+    def hae_kayttajat_joilla_tehtavia():
+
+        stmt = text("SELECT DISTINCT Kayttaja.nimi, tehtava.nimi FROM Kayttaja"
+                    " LEFT JOIN Tehtava ON Tehtava.kayttajaid = Kayttaja.id"
+                    " GROUP BY Kayttaja.nimi"
+                    " HAVING COUNT(Tehtava.id) > 0")
+        kayttajat = []
+        tulos = db.engine.execute(stmt)
+        for rivi in tulos:
+            kayttajat.append({"nimi":rivi[0], "tehtavanimi":rivi[1]})
+
+        return kayttajat
 
     # Kirjastojen vaatimat metodit
     def get_id(self):

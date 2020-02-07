@@ -1,6 +1,7 @@
 from application import db
 from application.models import Pohja
 from application.aihe.models import tehtavaAihe
+
 class Tehtava(Pohja):
 
     pvm = db.Column(db.DateTime)
