@@ -21,15 +21,40 @@
         </tr>
         <tr>
             <td>
+                {{ form.kuvaus.label }}
+            </td>
+            <td>
+                {{ form.kuvaus(cols="45", rows="10") }}
+            </td>
+        </tr>
+        <tr>
+            <td>
                 {{ form.valmis.label }}
             </td>
             <td>
                 {{ form.valmis }}
             </td>
+
+        </tr>
+        <tr>
+            <td>
+                {{ form.aihe.label }}
+            </td>
+            <td>
+                {{ form.aihe }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form.pvm.label }}
+            </td>
+            <td>
+                {{ form.pvm }}
+            </td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="Lisää tehtävä"/>
+                <input type="submit" value="Lisää tehtävä" style="width:200px;"/>
 
             </td>
         </tr>

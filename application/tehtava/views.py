@@ -4,6 +4,8 @@ from flask_login import login_required, current_user
 from application.tehtava.models import Tehtava
 from application.tehtava.forms import TehtavaLomake
 from application.auth.models import Kayttaja
+from application.aihe.models import Aihe
+from sqlalchemy.sql import text
 
 @app.route("/tehtava", methods=["GET"])
 @login_required
@@ -45,6 +47,11 @@ def tehtava_luo():
     t = Tehtava(request.form.get("nimi"))
     t.valmis = form.valmis.data
     t.kayttajaid = current_user.id
+    t.kuvaus = form.kuvaus.data
+    aiheet = form.aihe.data.split(",")
+
+    for aihe in aiheet:
+        t.aiheet.append(Aihe(aihe))
 
     db.session().add(t)
     db.session().commit()
@@ -61,3 +68,13 @@ def tehtava_poista(tehtava_id):
 
     return redirect(url_for("tehtava_index"))
 
+@app.route("/tilastot/")
+@login_required
+def tilastot_index():
+    return render_template("/tehtava/tilastot.html")
+
+@app.route("/tehtava/listaa_aiheet/", methods=["GET"])
+@login_required
+def listaa_aiheet():
+    aiheet = Kayttaja.hae_aiheet(current_user.id)
+    return render_template("tehtava/listaa_aiheet.html", aiheet=aiheet)

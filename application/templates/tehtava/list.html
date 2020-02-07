@@ -11,12 +11,14 @@
     <tr>
       <td>{{ t.nimi }}</td>
       <td>{{ t.valmis }}</td>
-      <td><a href="{{url_for('tehtava_poista', tehtava_id=t.id) }}">Poista</a></td>
+      <td>{{ t.kuvaus }}</td>
       <td>
         <form method="POST" action="{{ url_for('tehtava_valmis', tehtava_id=t.id) }}">
             <input type="submit" value="Tehty"/>
           </form>
       </td>
+      <td><a href="{{url_for('tehtava_poista', tehtava_id=t.id) }}">Poista</a></td>
+
     </tr>
     {% endfor %}
   </table>

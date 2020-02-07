@@ -1,6 +1,6 @@
 from application import db
 from application.models import Pohja
-
+from application.aihe.models import tehtavaAihe
 class Tehtava(Pohja):
 
     pvm = db.Column(db.DateTime)
@@ -9,7 +9,8 @@ class Tehtava(Pohja):
     kayttajaid = db.Column(db.Integer, db.ForeignKey('kayttaja.id'),
                             nullable=False)
 
-    aiheet = db.relationship("TehtavaAihe", backref='tehtava', lazy=True)
+    aiheet = db.relationship('Aihe', backref='tehtava',
+                            secondary=tehtavaAihe, lazy=True)
 
     def __init__(self, nimi):
         self.nimi = nimi

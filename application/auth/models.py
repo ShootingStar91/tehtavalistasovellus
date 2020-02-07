@@ -31,6 +31,21 @@ class Kayttaja(Pohja):
 
         return palautus
 
+    @staticmethod
+    def hae_aiheet(kayttajaid):
+
+        stmt = text("SELECT Aihe.nimi, Tehtava.nimi FROM Aihe"
+		    " LEFT JOIN TehtavaAihe ON Aihe.id = TehtavaAihe.aiheid"
+		    " LEFT JOIN Tehtava ON TehtavaAihe.tehtavaid = Tehtava.id"
+		    " WHERE Tehtava.kayttajaid = :kayttaja_id").params(kayttaja_id=kayttajaid)
+
+        aiheet = []
+        tulos = db.engine.execute(stmt)
+        for rivi in tulos:
+    	    aiheet.append({"nimi":rivi[0], "tehtavanimi":rivi[1]})
+
+        return aiheet
+
 
     # Kirjastojen vaatimat metodit
     def get_id(self):

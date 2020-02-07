@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% if aiheet is defined %}
+  <table>
+    <tr>
+        <th>Aihe</th>
+    </tr>
+    {% for aihe in aiheet %}
+    <tr>
+      <td>{{ aihe.nimi }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% else %}
+  <p><b>Sinulla ei ole yhtään aihetta sovelluksessa!</b></p>
+  {% endif %}
+{% endblock %}

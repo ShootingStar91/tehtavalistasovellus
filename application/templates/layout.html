@@ -21,10 +21,13 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('tehtava_lomake') }} ">Lisää tehtävä</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('tilastot_index') }} ">Tilastot</a>
+            </li>
           </ul>
           <div class="form-inline mt-2 mt-md-0">
 	    {% if current_user.is_authenticated %}
-	    <a href="{{ url_for('auth_uloskirjaudu') }}">Kirjautuneena: {{ current_user.nimi }}  |   Kirjaudu ulos</a>
+	    <a href="{{ url_for('auth_uloskirjaudu') }}">Kirjautuneena: <b>{{ current_user.nimi }}</b>  |  Kirjaudu ulos</a>
 	    {% else %}
       <a href="{{ url_for('auth_kirjaudu') }}">Kirjaudu sisään </a> |--|
       <a href="{{ url_for('auth_rekisteroidy') }}"> Rekisteröidy</a>

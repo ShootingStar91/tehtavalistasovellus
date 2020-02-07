@@ -24,7 +24,7 @@ def auth_kirjaudu():
 
     login_user(kayttaja)
 
-    return redirect(url_for("index"))
+    return redirect(url_for("tehtava_index"))
 
 @app.route("/auth/rekisteroidy", methods = ["GET", "POST"])
 def auth_rekisteroidy():
