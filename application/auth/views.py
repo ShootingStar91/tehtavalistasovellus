@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user
 
 from application import app, db
 from application.auth.models import Kayttaja
-from application.templates.auth.forms import KirjautumisLomake, RekisteroitymisLomake
+from application.auth.forms import KirjautumisLomake, RekisteroitymisLomake
 
 @app.route("/auth/kirjaudu", methods = ["GET", "POST"])
 def auth_kirjaudu():

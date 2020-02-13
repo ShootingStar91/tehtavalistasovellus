@@ -23,7 +23,6 @@ Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tila
   + **application**
     + *__init__.py*
     + *models.py*
-    + tehtava.db
     + *views.py*
     + **tehtava**
       + *models.py*
@@ -31,6 +30,7 @@ Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tila
       + *forms.py*
     + **auth**
       + *models.py*
+      + *forms.py*
       + *views.py*
     + **aihe**
       + *models.py*
@@ -38,7 +38,6 @@ Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tila
       + index.html
       + layout.html
       + **auth**
-        + *forms.py*
         + kirjautumislomake.html
         + rekisteroitymislomake.html
       + **tehtava**
