@@ -9,6 +9,8 @@ class Pohja(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nimi = db.Column(db.String(144), nullable=False)
 
+'''
+#Onko tämä turha?
 
 class TehtavaAihe(db.Model):
 
@@ -39,3 +41,4 @@ class TehtavaAihe(db.Model):
         return True
 
 
+'''

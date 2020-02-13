@@ -44,16 +44,17 @@ def tehtava_luo():
     if not form.validate():
         return render_template("tehtava/uusi.html", form = form)
 
-    t = Tehtava(request.form.get("nimi"))
-    t.valmis = form.valmis.data
-    t.kayttajaid = current_user.id
-    t.kuvaus = form.kuvaus.data
+    tehtava = Tehtava(request.form.get("nimi"))
+    tehtava.valmis = form.valmis.data
+    tehtava.kayttajaid = current_user.id
+    tehtava.kuvaus = form.kuvaus.data
+    tehtava.pvm = form.pvm.data
     aiheet = form.aihe.data.split(",")
 
     for aihe in aiheet:
-        t.aiheet.append(Aihe(aihe))
+        tehtava.aiheet.append(Aihe(aihe))
 
-    db.session().add(t)
+    db.session().add(tehtava)
     db.session().commit()
 
     return redirect(url_for("tehtava_index"))
