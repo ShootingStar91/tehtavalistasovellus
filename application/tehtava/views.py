@@ -68,6 +68,7 @@ def tehtava_luo():
 
     return redirect(url_for("tehtava_index"))
 
+
 @app.route("/tehtava/poista/<tehtava_id>")
 @login_required
 def tehtava_poista(tehtava_id):

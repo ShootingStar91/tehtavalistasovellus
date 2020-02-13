@@ -10,7 +10,7 @@ class Tehtava(Pohja):
     kayttajaid = db.Column(db.Integer, db.ForeignKey('kayttaja.id'),
                             nullable=False)
 
-    aiheet = db.relationship('Aihe', backref='tehtava', secondary=tehtavaAihe)
+    aiheet = db.relationship('aihe', backref='tehtava', secondary=tehtavaAihe)
 
     def __init__(self, nimi):
         self.nimi = nimi
