@@ -37,7 +37,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 login_manager.login_view = "auth_kirjaudu"
-login_manager.login_message = "error"
+login_manager.login_message = "Kirjaudu sisään käyttääksesi toimintoa"
 
 @login_manager.user_loader
 def lataa_kayttaja(user_id):
