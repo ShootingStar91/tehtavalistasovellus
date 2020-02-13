@@ -8,8 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 tehtavaAihe = db.Table('tehtavaAihe',
     db.Column('tehtavaid', db.Integer, db.ForeignKey('tehtava.id'), nullable=False),
-    db.Column('aiheid', db.Integer, db.ForeignKey('aihe.id'), nullable=False),
-    db.PrimaryKeyConstraint('tehtavaid', 'aiheid'))
+    db.Column('aiheid', db.Integer, db.ForeignKey('aihe.id'), nullable=False))
 
 class Aihe(Pohja):
 

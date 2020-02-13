@@ -50,8 +50,10 @@ def tehtava_luo():
     tehtava.kuvaus = form.kuvaus.data
     tehtava.pvm = form.pvm.data
     aiheet = form.aihe.data.split(",")
+
     db.session().add(tehtava)
     db.session().commit()
+
     for aihe in aiheet:
 
         uusi_aihe = Aihe(aihe)
@@ -61,7 +63,9 @@ def tehtava_luo():
         stmt = tehtavaAihe.insert().values(tehtavaid=tehtava.id, aiheid=uusi_aihe.id)
 
         db.session().execute(stmt)
+
     db.session().commit()
+
     return redirect(url_for("tehtava_index"))
 
 @app.route("/tehtava/poista/<tehtava_id>")
