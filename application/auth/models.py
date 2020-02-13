@@ -18,9 +18,9 @@ class Kayttaja(Pohja):
     # Hae käyttäjän omat tehtävät
     @staticmethod
     def hae_tehtavat(kayttajaid):
-        stmt = text("SELECT Tehtava.nimi, Tehtava.kuvaus, Tehtava.pvm, Tehtava.valmis, Tehtava.id"
-                    " FROM Tehtava WHERE"
-                    " Tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
+        stmt = text("SELECT tehtava.nimi, tehtava.kuvaus, tehtava.pvm, tehtava.valmis, tehtava.id"
+                    " FROM tehtava WHERE"
+                    " tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
 
         tulos = db.engine.execute(stmt)
 
@@ -34,10 +34,10 @@ class Kayttaja(Pohja):
     @staticmethod
     def hae_aiheet(kayttajaid):
 
-        stmt = text("SELECT Aihe.nimi, Tehtava.nimi FROM Aihe"
-		    " LEFT JOIN TehtavaAihe ON Aihe.id = TehtavaAihe.aiheid"
-		    " LEFT JOIN Tehtava ON TehtavaAihe.tehtavaid = Tehtava.id"
-		    " WHERE Tehtava.kayttajaid = :kayttaja_id").params(kayttaja_id=kayttajaid)
+        stmt = text("SELECT aihe.nimi, tehtava.nimi FROM aihe"
+		    " LEFT JOIN tehtavaaihe ON aihe.id = tehtavaaihe.aiheid"
+		    " LEFT JOIN tehtava ON tehtavaaihe.tehtavaid = tehtava.id"
+		    " WHERE tehtava.kayttajaid = :kayttaja_id").params(kayttaja_id=kayttajaid)
 
         aiheet = []
         tulos = db.engine.execute(stmt)
@@ -49,10 +49,10 @@ class Kayttaja(Pohja):
     @staticmethod
     def hae_kayttajat_joilla_tehtavia():
 
-        stmt = text("SELECT DISTINCT Kayttaja.nimi FROM Kayttaja"
-                    " LEFT JOIN Tehtava ON Tehtava.kayttajaid = Kayttaja.id"
-                    " GROUP BY Kayttaja.nimi"
-                    " HAVING COUNT(Tehtava.id) > 0")
+        stmt = text("SELECT DISTINCT kayttaja.nimi FROM kayttaja"
+                    " LEFT JOIN tehtava ON tehtava.kayttajaid = kayttaja.id"
+                    " GROUP BY kayttaja.nimi"
+                    " HAVING COUNT(tehtava.id) > 0")
         kayttajat = []
         tulos = db.engine.execute(stmt)
         for rivi in tulos:
