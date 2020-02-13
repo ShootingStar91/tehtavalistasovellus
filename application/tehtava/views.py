@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from application.tehtava.models import Tehtava
 from application.tehtava.forms import TehtavaLomake
 from application.auth.models import Kayttaja
-from application.aihe.models import Aihe
+from application.aihe.models import Aihe, tehtavaAihe
 from sqlalchemy.sql import text
 
 @app.route("/tehtava", methods=["GET"])
@@ -50,12 +50,17 @@ def tehtava_luo():
     tehtava.kuvaus = form.kuvaus.data
     tehtava.pvm = form.pvm.data
     aiheet = form.aihe.data.split(",")
-
-    for aihe in aiheet:
-        tehtava.aiheet.append(Aihe(aihe))
-
     db.session().add(tehtava)
     db.session().commit()
+    for aihe in aiheet:
+
+        uusi_aihe = Aihe(aihe)
+
+        db.session().add(uusi_aihe)
+        db.session().commit()
+        stmt = tehtavaAihe.insert().values(tehtavaid=tehtava.id, aiheid=uusi_aihe.id)
+
+        db.session.execute(stmt)
 
     return redirect(url_for("tehtava_index"))
 
