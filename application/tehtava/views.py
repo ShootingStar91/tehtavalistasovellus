@@ -61,7 +61,7 @@ def tehtava_luo():
         stmt = tehtavaAihe.insert().values(tehtavaid=tehtava.id, aiheid=uusi_aihe.id)
 
         db.session.execute(stmt)
-
+    db.session.commit()
     return redirect(url_for("tehtava_index"))
 
 @app.route("/tehtava/poista/<tehtava_id>")
