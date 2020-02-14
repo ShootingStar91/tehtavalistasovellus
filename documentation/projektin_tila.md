@@ -2,13 +2,10 @@
 
 Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tilasta.
 
-**Tilanne viikon 4 kohdalla**
+**Tilanne 14.2.2020**
 
-+ Tehtävään voi lisätä aiheita pilkulla eroteltuna
-  + Esimerkiksi: koulu,matematiikka,tentti
-  + Aiheita ei voi kuitenkaan herokussa katsoa. Paikallisesti toimii jo ominaisuus, jossa tilastot-sivun kautta pystyy katsomaan omat lisätyt aiheet. Tämä ei kuitenkaan toimi jostain syystä Herokussa.
-  + Ongelma liittynee monesta moneen -taulun toteutukseen jotenkin.
-+ Herokussa pystyy näkemään yhteenvetokyselyn tuloksen, eli listauksen käyttäjistä, joilla on vähintään 1 tehtävä sovelluksessa.
++ Monesta-moneen suhde toteutettu. Tilastot-sivulla nyt pystyy listaamaan aiheet joita käyttäjä on syöttänyt, eli haku tapahtuu taulujen kautta näin: aihe->tehtavaaihe->tehtava->kayttaja
++ Autorisointia ei vielä toteutettu muuten kuin login_required määreellä joka opetettiin jo viikolla 3. Koitin toteuttaa viikon 5 materiaalin mukaisesti, mutta en saanut toimimaan.
 
 
 ### Projektin nykyinen rakenne
