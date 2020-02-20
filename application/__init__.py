@@ -59,12 +59,12 @@ from application.aihe import models
 from application.auth.models import Kayttaja
 
 from datetime import datetime
-
+'''
 def muotoile_pvm(pvm):
     return pvm[8:10]+"."+pvm[5:7]+"."+pvm[0:4]
 
 app.jinja_env.globals.update(muotoile_pvm=muotoile_pvm)
-
+'''
 @login_manager.user_loader
 def lataa_kayttaja(user_id):
     kayttaja = Kayttaja.query.get(user_id)
