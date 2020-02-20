@@ -61,7 +61,7 @@ from application.auth.models import Kayttaja
 from datetime import datetime
 
 def muotoile_pvm(pvm):
-    return pvm[8:10]+"."+pvm[5:7]+"."+pvm[0:4]
+    return str(pvm)[8:10]+"."+str(pvm)[5:7]+"."+str(pvm)[0:4]
 
 app.jinja_env.globals.update(muotoile_pvm=muotoile_pvm)
 
