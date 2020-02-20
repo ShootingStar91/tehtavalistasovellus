@@ -12,7 +12,6 @@ def auth_kirjaudu():
 
 
     form = KirjautumisLomake(request.form)
-    # validoinnit
 
     kayttaja = Kayttaja.query.filter_by(tunnus=form.tunnus.data,
         salasana=form.salasana.data).first()
@@ -22,8 +21,8 @@ def auth_kirjaudu():
             form = form, error = "Ei löydetty tunnusta tai salasanaa")
 
 
+    logout_user()
     login_user(kayttaja)
-
     return redirect(url_for("tehtava_index"))
 
 @app.route("/auth/rekisteroidy", methods = ["GET", "POST"])
@@ -33,12 +32,20 @@ def auth_rekisteroidy():
 
     form = RekisteroitymisLomake(request.form)
 
+    if not form.validate():
+        return render_template("/auth/rekisteroitymislomake.html", form=form)
+
     uusiKayttaja = Kayttaja(form.nimi.data, form.tunnus.data, form.salasana.data)
+
+
 
     db.session().add(uusiKayttaja)
     db.session().commit()
 
-    return redirect(url_for("index"))
+    
+    login_user(uusiKayttaja)
+
+    return redirect(url_for("tehtava_index"))
 
 @app.route("/auth/uloskirjaudu")
 def auth_uloskirjaudu():

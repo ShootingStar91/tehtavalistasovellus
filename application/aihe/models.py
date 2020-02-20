@@ -1,7 +1,5 @@
 from application import db
 from application.models import Pohja
-
-# many-to-many kokeilua
 from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
@@ -14,7 +12,7 @@ class Aihe(Pohja):
 
     __tablename__ = "aihe"
 
-    tehtavat = db.relationship('Tehtava', secondary=tehtavaAihe, backref='Aihe')
+    tehtavat = db.relationship('Tehtava', secondary=tehtavaAihe, backref='Aihe', viewonly=True)
 
     def __init__(self, nimi):
         self.nimi = nimi

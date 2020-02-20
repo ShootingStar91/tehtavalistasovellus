@@ -8,8 +8,6 @@ class Kayttaja(Pohja):
 
     tunnus = db.Column(db.String(144), nullable=False)
     salasana = db.Column(db.String(144), nullable=False)
-
-
     def __init__(self, nimi, tunnus, salasana):
         self.nimi = nimi
         self.tunnus = tunnus
@@ -72,4 +70,10 @@ class Kayttaja(Pohja):
 
     def is_authenticated(self):
         return True
+
+    def roles(self):
+        if self.tunnus=="taikuri54":
+            return ["ADMIN"]
+        return ["USER"]
+
 

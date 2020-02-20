@@ -2,11 +2,15 @@
 
 Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tilasta.
 
-**Tilanne 14.2.2020**
+**Tilanne 20.2.2020**
 
 + Monesta-moneen suhde toteutettu. Tilastot-sivulla nyt pystyy listaamaan aiheet joita käyttäjä on syöttänyt, eli haku tapahtuu taulujen kautta näin: aihe->tehtavaaihe->tehtava->kayttaja
-+ Autorisointia ei vielä toteutettu muuten kuin login_required määreellä joka opetettiin jo viikolla 3. Koitin toteuttaa viikon 5 materiaalin mukaisesti, mutta en saanut toimimaan.
++ Isoja päivityksiä ulkoasuun listauksen osalta, mutta paljon on vielä tehtävää.
++ Validoinnit pitäisi olla nyt pääpiirteittäin OK.
++ Virheviestejä tarvitaan tehtävän luomislomakkeeseen
++ Listausrajaukset ja järjestelyt tarvitaan
 
+___
 
 ### Projektin nykyinen rakenne
 
@@ -18,7 +22,7 @@ Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tila
   + Procfile
   + requirements.txt
   + **application**
-    + *__init__.py*
+    + *\_\_init\_\_.py*
     + *models.py*
     + *views.py*
     + **tehtava**

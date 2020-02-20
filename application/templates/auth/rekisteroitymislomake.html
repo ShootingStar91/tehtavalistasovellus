@@ -3,8 +3,17 @@
 
 {% block body %}
 {{ error }}
+
+<style>
+
+  tr, td {
+    padding: 10px;
+  }
+
+</style>
+
 <form method="POST" action="{{ url_for('auth_rekisteroidy') }}">
-  <table>
+  <table >
     <tr>
         <td>
       {{ form.tunnus.label }}
@@ -12,6 +21,13 @@
         <td>
       {{ form.tunnus }}
         </td>
+        <td>
+          <ul>
+              {% for error in form.tunnus.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+          </ul>
+      </td>
       </tr>
       <tr>
         <tr>
@@ -21,6 +37,14 @@
             <td>
           {{ form.nimi }}
             </td>
+            <td>
+              <ul>
+                  {% for error in form.nimi.errors %}
+                  <li>{{ error }}</li>
+                  {% endfor %}
+              </ul>
+          </td>
+  
           </tr>
           <tr>
               <td>
@@ -29,10 +53,19 @@
       <td>
 	{{ form.salasana }}
       </td>
+      <td>
+        <ul>
+            {% for error in form.salasana.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </td>
     </tr>
+
     <tr>
+      <td></td>
       <td colspan="2">
-	<input type="submit" value="Rekisteröidy"/>
+	<input type="submit" value="Rekisteröidy" style="width: 200px;"/>
       </td>
     </tr>
 </form>

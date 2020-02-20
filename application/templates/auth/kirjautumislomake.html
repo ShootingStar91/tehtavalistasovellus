@@ -3,6 +3,15 @@
 
 {% block body %}
 {{ error }}
+
+<style>
+
+      tr, td {
+        padding: 20px;
+      }
+
+    </style>
+
 <form method="POST" action="{{ url_for('auth_kirjaudu') }}">
   <table>
     <tr>
@@ -22,8 +31,9 @@
       </td>
     </tr>
     <tr>
+          <td>    </td>
       <td colspan="2">
-	<input type="submit" value="Kirjaudu"/>
+	<input type="submit" value="Kirjaudu" style="width: 200px;"/>
       </td>
     </tr>
 </form>

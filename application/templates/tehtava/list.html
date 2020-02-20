@@ -2,22 +2,66 @@
 
 {% block body %}
 {% if tehtavat is defined %}
+
+<style>
+
+  table {
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+
+  td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {background-color: #ddd;}
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #8515c1;
+    color: white;
+  }
+
+</style>
   <table>
-    <tr>
-        <th>Tehtävä</th>
-      <th>Valmis</th>
-    </tr>
+    <th>Tehtävä</th>
+    <th>Valmis</th>
+    <th>Kuvaus</th>
+    <th>Päivämäärä</th>
+    <th></th>
+    <th></th>
     {% for t in tehtavat %}
     <tr>
+
       <td>{{ t.nimi }}</td>
-      <td>{{ t.valmis }}</td>
-      <td>{{ t.kuvaus }}</td>
+
+      <td>
+        {% if t.valmis %}
+          <span class="glyphicon glyphicon-ok-sign"></span>
+        {% else %}
+          <span class="glyphicon glyphicon-minus-sign"></span>
+        {% endif %}
+      </td>
+
+      <td style="width: 500px;">{{ t.kuvaus }}</td>
+
+      <td>{% if t.pvm is not none %}{{muotoile_pvm(t.pvm)}}{% endif %}</td>
+
       <td>
         <form method="POST" action="{{ url_for('tehtava_valmis', tehtava_id=t.id) }}">
-            <input type="submit" value="Tehty"/>
+          {% if not t.valmis %}<input type="submit" value="Valmis"/>{% endif %}
           </form>
       </td>
+
       <td><a href="{{url_for('tehtava_poista', tehtava_id=t.id) }}">Poista</a></td>
+
 
     </tr>
     {% endfor %}

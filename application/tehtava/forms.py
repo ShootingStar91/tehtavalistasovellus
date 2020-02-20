@@ -8,5 +8,11 @@ class TehtavaLomake(FlaskForm):
     kuvaus = StringField("Kuvaus", [validators.Length(max=1000)], widget=TextArea())
     pvm = DateField("Deadline (dd.mm.yyyy)", format='%d.%m.%Y')
     aihe = StringField("Aiheet")
+    #aiheet = SelectField("Aiheet")
+    #Viewissä
+    # choices = Aihe.query.filterby(account.id)
+    #formi = TehtavaLomake()
+    #formi.aiheet.choices = choices
+
     class Meta:
         csrf = False
