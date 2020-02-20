@@ -13,6 +13,7 @@ class TehtavaLomake(FlaskForm):
     # choices = Aihe.query.filterby(account.id)
     #formi = TehtavaLomake()
     #formi.aiheet.choices = choices
+    
 
     class Meta:
         csrf = False

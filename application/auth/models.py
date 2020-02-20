@@ -44,6 +44,7 @@ class Kayttaja(Pohja):
 
         return aiheet
 
+
     @staticmethod
     def hae_kayttajat_joilla_tehtavia():
 

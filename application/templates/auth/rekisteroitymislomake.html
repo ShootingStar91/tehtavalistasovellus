@@ -4,16 +4,11 @@
 {% block body %}
 {{ error }}
 
-<style>
 
-  tr, td {
-    padding: 10px;
-  }
-
-</style>
+<element class="lomake">
 
 <form method="POST" action="{{ url_for('auth_rekisteroidy') }}">
-  <table >
+  <table class="lomake">
     <tr>
         <td>
       {{ form.tunnus.label }}
@@ -21,6 +16,8 @@
         <td>
       {{ form.tunnus }}
         </td>
+        {% if (form.tunnus.errors is defined) and form.tunnus.errors %}
+
         <td>
           <ul>
               {% for error in form.tunnus.errors %}
@@ -28,6 +25,7 @@
               {% endfor %}
           </ul>
       </td>
+      {% endif %}
       </tr>
       <tr>
         <tr>
@@ -37,6 +35,8 @@
             <td>
           {{ form.nimi }}
             </td>
+            {% if (form.nimi.errors is defined) and form.nimi.errors %}
+
             <td>
               <ul>
                   {% for error in form.nimi.errors %}
@@ -44,6 +44,7 @@
                   {% endfor %}
               </ul>
           </td>
+          {% endif %}
   
           </tr>
           <tr>
@@ -53,20 +54,23 @@
       <td>
 	{{ form.salasana }}
       </td>
+      {% if (form.salasana.errors is defined) and form.salasana.errors %}
       <td>
         <ul>
             {% for error in form.salasana.errors %}
             <li>{{ error }}</li>
             {% endfor %}
         </ul>
-    </td>
+     </td>
+     {% endif %}
     </tr>
 
     <tr>
       <td></td>
       <td colspan="2">
-	<input type="submit" value="Rekisteröidy" style="width: 200px;"/>
+	<input type="submit" value="Rekisteröidy"/>
       </td>
     </tr>
 </form>
+</element>
 {% endblock %}

@@ -12,13 +12,11 @@ from sqlalchemy.sql import text
 def tehtava_index():
 
     tehtavalista = Kayttaja.hae_tehtavat(current_user.id)
+
     if len(tehtavalista) == 0:
         return render_template("tehtava/list.html")
     
     return render_template("tehtava/list.html", tehtavat=tehtavalista)
-
-   # vanha tehtävälistaus
-   # return render_template("tehtava/list.html", tehtavat = Tehtava.query.all())
 
 @app.route("/tehtava/kaikki", methods=["GET"])
 @login_required(role="ADMIN")
@@ -31,7 +29,7 @@ def tehtava_kaikki():
 
     tehtavalista = []
     for rivi in tulos:
-        tehtavalista.append({"nimi":rivi[0], "kuvaus":rivi[1], "pvm":rivi[2], "valmis":rivi[3], 
+        tehtavalista.append({"nimi":rivi[0], "kuvaus":rivi[1], "pvm":str(rivi[2]), "valmis":rivi[3], 
                             "id":rivi[4]})
     if len(tehtavalista)==0: return render_template("tehtava/list.html")
 
@@ -41,7 +39,8 @@ def tehtava_kaikki():
 @app.route("/tehtava/uusi/")
 @login_required(role="ANY")
 def tehtava_lomake():
-    return render_template("tehtava/uusi.html", form = TehtavaLomake())
+    vanhatAiheet = Kayttaja.hae_aiheet(current_user.id)
+    return render_template("tehtava/uusi.html", form = TehtavaLomake(), vanhatAiheet = vanhatAiheet)
 
 @app.route("/tehtava/<tehtava_id>/", methods=["POST"])
 @login_required
@@ -67,20 +66,30 @@ def tehtava_luo():
     tehtava.kayttajaid = current_user.id
     tehtava.kuvaus = form.kuvaus.data
     tehtava.pvm = form.pvm.data
-    aiheet = form.aihe.data.split(",")
+    uudetAiheet = form.aihe.data.split(",")
+    valitutAiheet = []
+
+    vanhatAiheet = Kayttaja.hae_aiheet(current_user.id)
+
+    checkboxit = request.form.getlist("vanhaAihe")
+
+    for checkbox in checkboxit:
+        valitutAiheet.append(checkbox)
+
+    for aihe in uudetAiheet:
+        if aihe=="": continue
+        valitutAiheet.append(aihe)
 
     db.session().add(tehtava)
     db.session().commit()
 
-    for aihe in aiheet:
-
+    for aihe in valitutAiheet:
         uusi_aihe = Aihe(aihe)
-
         db.session().add(uusi_aihe)
         db.session().commit()
-        stmt = tehtavaAihe.insert().values(tehtavaid=tehtava.id, aiheid=uusi_aihe.id)
+        kysely = tehtavaAihe.insert().values(tehtavaid=tehtava.id, aiheid=uusi_aihe.id)
 
-        db.session().execute(stmt)
+        db.session().execute(kysely)
 
     db.session().commit()
 

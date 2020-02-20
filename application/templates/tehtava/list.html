@@ -8,25 +8,29 @@
   table {
     margin-left: 20px;
     margin-top: 20px;
+    max-width: 95%;
   }
 
   td, th {
     border: 1px solid #ddd;
     padding: 8px;
+    height: 60px;
   }
 
   tr:nth-child(even) {
     background-color: #f2f2f2;
   }
 
-  tr:hover {background-color: #ddd;}
+
+  tr:hover {background-color: lightyellow;}
 
   th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #8515c1;
+    background-color:lightsteelblue;
     color: white;
+    height: 90px;
   }
 
 </style>
@@ -52,7 +56,7 @@
 
       <td style="width: 500px;">{{ t.kuvaus }}</td>
 
-      <td></td>
+      <td>{% if t.pvm is not none %}{{ muotoile_pvm(t.pvm) }}{% endif %}</td>
 
       <td>
         <form method="POST" action="{{ url_for('tehtava_valmis', tehtava_id=t.id) }}">

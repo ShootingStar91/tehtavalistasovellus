@@ -4,16 +4,9 @@
 {% block body %}
 {{ error }}
 
-<style>
-
-      tr, td {
-        padding: 20px;
-      }
-
-    </style>
-
+<element class="lomake">
 <form method="POST" action="{{ url_for('auth_kirjaudu') }}">
-  <table>
+  <table class="lomake">
     <tr>
       <td>
 	{{ form.tunnus.label }}
@@ -33,8 +26,9 @@
     <tr>
           <td>    </td>
       <td colspan="2">
-	<input type="submit" value="Kirjaudu" style="width: 200px;"/>
+	<input type="submit" value="Kirjaudu"/>
       </td>
     </tr>
 </form>
+</element>
 {% endblock %}

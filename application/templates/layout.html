@@ -3,23 +3,69 @@
     <head>
       <meta charset="utf-8">
       <title>Tehtävälistasovellus</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  
+      <style>
+
+        .lomake table {
+          margin-top: 30px;
+          margin-left: 30px;
+          background-color:rgb(192, 205, 223);
+          color:ivory;
+          max-width: 50%;
+        }
+
+        .lomake td, tr {
+          padding: 15px;
+          
+        }
+
+        .lomake input[type=text], input[type=password] {
+          border: 0px;
+          background-color:lightyellow;
+          color:black;
+          padding-left: 10px;
+          width: 500px;
+          height: 40px;
+        }
+
+        .lomake input[type=submit] {
+          background-color:lightgoldenrodyellow;
+          border: none;
+          color:black;
+          
+          font-style: bold;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 20px;
+          width: 500px;
+
+        }
+
+        .lomake textarea {
+          resize: none;
+          width: 500px;
+          height: 120px;
+          background-color:lightyellow;
+          border: 0px;
+
+        }
+
+      </style>
     </head>
     
     <body>
 
-      <nav class="navbar navbar-expand-md navbar-light bg-secondary">
-	<a class="navbar-brand" href="#">Tehtävälistasovellus</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Tehtävälistasovellus</a>
+          </div>
+          <ul class="nav navbar-nav">
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('tehtava_index') }} ">Listaa tehtävät</a>
             </li>
@@ -29,16 +75,21 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('tilastot_index') }} ">Tilastot</a>
             </li>
+            {% if current_user.is_authenticated %}
+            <li>
+              <a class="nav-link" href="{{ url_for('auth_uloskirjaudu') }}">Kirjautuneena: <b>{{ current_user.nimi }}</b> (Kirjaudu ulos)</a></a>
+            </li>
+            {% else %}
+            <li>
+              <a class="nav-link" href="{{ url_for('auth_kirjaudu') }}">Kirjaudu sisään </a>
+            </li>
+            <li>
+              <a class="nav-link" href="{{ url_for('auth_rekisteroidy') }}"> Rekisteröidy</a>
+            </li>
+            {% endif %}
           </ul>
-          <div class="form-inline mt-2 mt-md-0">
-	    {% if current_user.is_authenticated %}
-	    <a href="{{ url_for('auth_uloskirjaudu') }}">Kirjautuneena: <b>{{ current_user.nimi }}</b> (Kirjaudu ulos)</a>
-	    {% else %}
-      <a href="{{ url_for('auth_kirjaudu') }}">Kirjaudu sisään </a> |--|
-      <a href="{{ url_for('auth_rekisteroidy') }}"> Rekisteröidy</a>
-	    {% endif %}
-          </div>
-	</div>
+  
+  </div>
       </nav>
       
       {% block body %}

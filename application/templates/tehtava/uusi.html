@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
   
 {% block body %}
+<element class="lomake">
 <form method="POST" action="{{ url_for('tehtava_luo') }}">
 
     <table>
@@ -38,7 +39,20 @@
         </tr>
         <tr>
             <td>
-                {{ form.aihe.label }}
+            Valitse aiheet
+            </td>
+            <td>
+            {% for aihe in vanhatAiheet %}
+            <span style="margin-right: 20px;">
+                <input type="checkbox" name="vanhaAihe" value="{{ aihe.nimi }}">
+                <label for=vanhaAihe>{{ aihe.nimi }}</label>
+            </span>
+            {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tai lisää uusia, erotettuna pilkulla, esimerkiksi: koulu,matematiikka
             </td>
             <td>
                 {{ form.aihe }}
@@ -53,8 +67,9 @@
             </td>
         </tr>
         <tr>
+            <td></td>
             <td colspan="2">
-                <input type="submit" value="Lisää tehtävä" style="width:200px;"/>
+                <input type="submit" value="Lisää tehtävä"/>
 
             </td>
         </tr>
@@ -62,4 +77,5 @@
 
 
 </form>
+</element>
 {% endblock %}
