@@ -2,13 +2,13 @@
 
 Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tilasta.
 
-**Tilanne 20.2.2020**
+**Tilanne 21.2.2020**
 
-+ Monesta-moneen suhde toteutettu. Tilastot-sivulla nyt pystyy listaamaan aiheet joita käyttäjä on syöttänyt, eli haku tapahtuu taulujen kautta näin: aihe->tehtavaaihe->tehtava->kayttaja
-+ Isoja päivityksiä ulkoasuun listauksen osalta, mutta paljon on vielä tehtävää.
-+ Validoinnit pitäisi olla nyt pääpiirteittäin OK.
-+ Virheviestejä tarvitaan tehtävän luomislomakkeeseen
-+ Listausrajaukset ja järjestelyt tarvitaan
++ Huomio herokusta arvioijille: Sovellus ei välillä ole auennut hetkeen - vika vaikuttaa olevan Herokun päässä sillä muutoksia ei tehty tuona aikana ja se alkoi taas toimimaan yhtäkkiä.
++ Ulkoasua kehitetty huomattavasti tärkeimpien sivujen osalta. HTML:n ja CSS:n validiutta ei vielä kuitenkaan ole huomioitu, eikä käytettävyyden hienostuneempia asioita.
++ Aiheiden lisäys alkaa olla hyvällä mallilla, joskin vaatii vielä varmentavaa testausta ja säätöä että duplikaattiaiheita ei samalle käyttäjälle tule
++ Tehtäviä voi lisätä ja niissä on aihe ja päivämäärä ja kuvaus ja valmius, ja niitä voi katsella. User Storyissä kuvattuja tehtävien listauksia rajaten tietyillä kriteereillä ei ole vielä, eikä myöskään järjestämistä. Näiden tekeminen on jo aloitettu ja tavoite on saada ainakin suurin osa niistä demoon maanantaiksi valmiiksi.
++ Tarkoitus on myös lisätä mahdollisuus käyttäjätilin managerointiin, eli kaikkien tilitietojen muokkaamiseen sekä koko tilin poistamiseen pysyvästi - mukaanlukien kaikki tiliin liittyvät tehtävät ja aiheet.
 
 ___
 
