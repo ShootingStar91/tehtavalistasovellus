@@ -74,8 +74,8 @@ def tehtava_luo():
     checkboxit = request.form.getlist("vanhaAihe")
 
     for checkbox in checkboxit:
-        valitutAiheet.append(checkbox)
-
+        valitutAiheet.append(Aihe.query.filter_by(id=int(checkbox)).first().nimi)
+ 
     for aihe in uudetAiheet:
         if aihe=="": continue
         valitutAiheet.append(aihe)
@@ -84,11 +84,21 @@ def tehtava_luo():
     db.session().commit()
 
     for aihe in valitutAiheet:
-        uusi_aihe = Aihe(aihe)
-        db.session().add(uusi_aihe)
-        db.session().commit()
-        kysely = tehtavaAihe.insert().values(tehtavaid=tehtava.id, aiheid=uusi_aihe.id)
+        uusi_aihe_id = -1
 
+        # Onko käyttäjän lisäämä aihe jo sittenkin olemassa?
+        for vanhaAihe in vanhatAiheet:
+            if aihe==vanhaAihe["nimi"]:
+                uusi_aihe_id = vanhaAihe["id"]
+                break
+
+        if uusi_aihe_id==-1:
+            uusi_aihe = Aihe(aihe)
+            db.session().add(uusi_aihe)
+            db.session().commit()
+            uusi_aihe_id = uusi_aihe.id
+
+        kysely = tehtavaAihe.insert().values(tehtavaid=tehtava.id, aiheid=uusi_aihe_id)
         db.session().execute(kysely)
 
     db.session().commit()

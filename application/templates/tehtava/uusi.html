@@ -44,7 +44,7 @@
             <td>
             {% for aihe in vanhatAiheet %}
             <span style="margin-right: 20px;">
-                <input type="checkbox" name="vanhaAihe" value="{{ aihe.nimi }}">
+                <input type="checkbox" name="vanhaAihe" value="{{ aihe.id }}">
                 <label for=vanhaAihe>{{ aihe.nimi }}</label>
             </span>
             {% endfor %}

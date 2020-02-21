@@ -41,30 +41,29 @@
     <th>Päivämäärä</th>
     <th></th>
     <th></th>
-    {% for t in tehtavat %}
+    {% for tehtava in tehtavat %}
     <tr>
 
-      <td>{{ t.nimi }}</td>
+      <td>{{ tehtava.nimi }}</td>
 
       <td>
-        {% if t.valmis %}
-          <span class="glyphicon glyphicon-ok-sign"></span>
-        {% else %}
-          <span class="glyphicon glyphicon-minus-sign"></span>
+        {% if tehtava.valmis %}
+          <span class="glyphicon glyphicon-ok"></span>
+        
         {% endif %}
       </td>
 
-      <td style="width: 500px;">{{ t.kuvaus }}</td>
+      <td style="width: 500px;">{{ tehtava.kuvaus }}</td>
 
-      <td>{% if t.pvm is not none %}{{ muotoile_pvm(t.pvm) }}{% endif %}</td>
+      <td>{% if tehtava.pvm is not none %}{{ muotoile_pvm(tehtava.pvm) }}{% endif %}</td>
 
       <td>
-        <form method="POST" action="{{ url_for('tehtava_valmis', tehtava_id=t.id) }}">
-          {% if not t.valmis %}<input type="submit" value="Valmis"/>{% endif %}
+        <form method="POST" action="{{ url_for('tehtava_valmis', tehtava_id=tehtava.id) }}">
+          {% if not tehtava.valmis %}<input type="submit" value="Valmis"/>{% endif %}
           </form>
       </td>
 
-      <td><a href="{{url_for('tehtava_poista', tehtava_id=t.id) }}">Poista</a></td>
+      <td><a href="{{url_for('tehtava_poista', tehtava_id=tehtava.id) }}">Poista</a></td>
 
 
     </tr>
