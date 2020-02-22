@@ -2,21 +2,19 @@
   
 {% block body %}
 <element class="lomake">
-    <h3 style="margin-left: 30px;">Luo uusi tehtävä</h1>
+    <h3 style="margin-left: 100px; margin-top: 50px;">Luo uusi tehtävä</h1>
 
 <form method="POST" action="{{ url_for('tehtava_luo') }}">
 
     <table>
         {% if virheviesti is defined %}
         <tr>
-
             <td style="color:red; font: bold;">Virhe</td>
             <td>{{ virheviesti }}</td>
         </tr>
         {% endif %}
         {% if viesti is defined %}
         <tr>
-
             <td></td>
             <td style="color:green; font: bold; font-size: 24px;">{{ viesti }}</td>
         </tr>

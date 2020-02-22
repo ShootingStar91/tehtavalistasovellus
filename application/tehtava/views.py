@@ -89,7 +89,7 @@ def tehtava_luo():
     form = TehtavaLomake(request.form)
     virheviesti = ""
     if not form.validate():
-        virheviesti="Tarkista, että tehtävän on vähintään 2 kirjainta ja jos syötit päivämäärän, että se on oikeassa muodossa (esimerkiksi 1.2.2020 tai 05.04.2021 kelpaavat)"
+        virheviesti="Tarkista, että tehtävän nimessä on 2-144 merkkiä ja jos syötit päivämäärän, että se on oikeassa muodossa (esimerkiksi 1.2.2020 tai 05.04.2021 kelpaavat)"
         return render_template("tehtava/uusi.html", form = form, virheviesti=virheviesti, vanhatAiheet=Kayttaja.hae_aiheet(current_user.id))
 
     tehtava = Tehtava(request.form.get("nimi"))
