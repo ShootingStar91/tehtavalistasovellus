@@ -1,22 +1,49 @@
 from flask import redirect, render_template, request, url_for
 from flask_login import current_user
 from application.tehtava.models import Tehtava
-from application.tehtava.forms import TehtavaLomake
+from application.tehtava.forms import TehtavaLomake, TehtavaHakuLomake
 from application.auth.models import Kayttaja
 from application.aihe.models import Aihe, tehtavaAihe
 from application import app, db, login_required
 from sqlalchemy.sql import text
+import datetime
 
-@app.route("/tehtava", methods=["GET"])
+@app.route("/tehtava", methods=["GET", "POST"])
 @login_required
 def tehtava_index():
+    form = TehtavaHakuLomake(request.form)
 
-    tehtavalista = Kayttaja.hae_tehtavat(current_user.id)
+    if request.method == "GET":
+        return render_template("tehtava/index.html", form=form)
+
+    valmius = form.valmis.data
+
+    query = db.session().query(Tehtava).filter_by(kayttajaid=current_user.id)
+
+    if valmius=='valmiit':
+        query = query.filter_by(valmis=True)
+    elif valmius=='kesken':
+        query = query.filter_by(valmis=False)
+    
+    alkupvm = form.alkupvm.data
+    loppupvm = form.loppupvm.data
+
+    if alkupvm == "" or alkupvm is None:
+        alkupvm = datetime.date(1900, 1, 1)
+    if loppupvm == "" or loppupvm is None:
+        loppupvm = datetime.date(2999, 1, 1)
+
+    loppupvm += datetime.timedelta(days=1)
+
+    query = query.filter(Tehtava.pvm.between(alkupvm, loppupvm))
+
+    tehtavalista = query.all()
 
     if len(tehtavalista) == 0:
         return render_template("tehtava/list.html")
-    
+
     return render_template("tehtava/list.html", tehtavat=tehtavalista)
+
 
 @app.route("/tehtava/kaikki", methods=["GET"])
 @login_required(role="ADMIN")
@@ -52,7 +79,7 @@ def tehtava_valmis(tehtava_id):
 
     return redirect(url_for("tehtava_index"))
 
-@app.route("/tehtava/", methods=["POST"])
+@app.route("/tehtava/luo_uusi", methods=["POST"])
 @login_required(role="ANY")
 def tehtava_luo():
 

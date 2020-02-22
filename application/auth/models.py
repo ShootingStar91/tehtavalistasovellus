@@ -32,7 +32,7 @@ class Kayttaja(Pohja):
     @staticmethod
     def hae_aiheet(kayttajaid):
 
-        stmt = text("SELECT aihe.nimi, aihe.id, tehtava.nimi FROM aihe"
+        stmt = text("SELECT DISTINCT aihe.nimi, aihe.id FROM aihe"
 		    " LEFT JOIN tehtavaaihe ON aihe.id = tehtavaaihe.aiheid"
 		    " LEFT JOIN tehtava ON tehtavaaihe.tehtavaid = tehtava.id"
 		    " WHERE tehtava.kayttajaid = :kayttaja_id").params(kayttaja_id=kayttajaid)
@@ -40,7 +40,7 @@ class Kayttaja(Pohja):
         aiheet = []
         tulos = db.engine.execute(stmt)
         for rivi in tulos:
-    	    aiheet.append({"nimi":rivi[0], "id":rivi[1], "tehtavanimi":rivi[2]})
+    	    aiheet.append({"nimi":rivi[0], "id":rivi[1]})
 
         return aiheet
 

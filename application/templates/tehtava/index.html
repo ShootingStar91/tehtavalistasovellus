@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<element class="lomake">
+    <h3 style="margin-left: 30px;">Tehtävien listaus</h3>
+    <table>
+<form method="POST" action="{{ url_for('tehtava_index') }}">
+<tr><td><b>Valmiit vai keskeneräiset</b></td><td style="padding-top: 30px;">
+    {{ form.valmis }}
+</td>
+</tr>
+<tr><td>
+    {{ form.alkupvm.label }}
+</td><td>
+    {{ form.alkupvm }}
+</td></tr><tr>
+<td>
+    {{ form.loppupvm.label }}
+</td><td>
+    {{ form.loppupvm }}
+</td>
+</tr>
+<tr><td></td><td>
+    <input type="submit" value="Listaa tehtävät"/>
+</td>
+    </tr>
+
+</form>
+</table>
+</element>
+
+{% endblock %}

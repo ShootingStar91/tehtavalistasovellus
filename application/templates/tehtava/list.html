@@ -65,12 +65,14 @@
 
       <td><a href="{{url_for('tehtava_poista', tehtava_id=tehtava.id) }}">Poista</a></td>
 
-
     </tr>
     {% endfor %}
   </table>
 
   {% else %}
-  <p><b>Sinulla ei ole yhtään tehtävää sovelluksessa!</b></p>
+  <div style="margin: 100px; font-size: 30px;">
+  <p>Joko hakuehdoillasi ei löytynyt yhtään tehtävää, tai sitten sinulla ei ole sovelluksessa ollenkaan tehtäviä!</p>
+</div>
   {% endif %}
+
 {% endblock %}

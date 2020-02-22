@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, DateField, validators
+from wtforms import BooleanField, StringField, DateField, RadioField, validators
 from wtforms.widgets import TextArea
 
 class TehtavaLomake(FlaskForm):
@@ -8,11 +8,15 @@ class TehtavaLomake(FlaskForm):
     kuvaus = StringField("Kuvaus", [validators.Length(max=1000)], widget=TextArea())
     pvm = DateField("Deadline (dd.mm.yyyy)", format='%d.%m.%Y')
     aihe = StringField("Aiheet")
-    #aiheet = SelectField("Aiheet")
-    #Viewissä
-    # choices = Aihe.query.filterby(account.id)
-    #formi = TehtavaLomake()
-    #formi.aiheet.choices = choices
+
+
+    class Meta:
+        csrf = False
+
+class TehtavaHakuLomake(FlaskForm):
+    alkupvm = DateField("Mistä alkaen (dd.mm.yyyy)", format='%d.%m.%Y')
+    loppupvm = DateField("Mihin asti", format='%d.%m.%Y')
+    valmis = RadioField("Valmis?", choices=[("kaikki", "Kaikki"), ("valmiit", "Valmiit"), ("kesken", "Tekemättömät")], default='kaikki')
     
 
     class Meta:
