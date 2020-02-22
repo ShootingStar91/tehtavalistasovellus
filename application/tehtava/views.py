@@ -36,7 +36,10 @@ def tehtava_index():
     loppupvm += datetime.timedelta(days=1)
 
     query = query.filter(Tehtava.pvm.between(alkupvm, loppupvm))
-
+    if (form.jarjestys.data=='nouseva'):
+        query = query.order_by(Tehtava.pvm)
+    elif (form.jarjestys.data=='laskeva'):
+        query = query.order_by(Tehtava.pvm.desc())
     tehtavalista = query.all()
 
     if len(tehtavalista) == 0:
@@ -84,15 +87,18 @@ def tehtava_valmis(tehtava_id):
 def tehtava_luo():
 
     form = TehtavaLomake(request.form)
-
+    virheviesti = ""
     if not form.validate():
-        return render_template("tehtava/uusi.html", form = form)
+        virheviesti="Tarkista, että tehtävän on vähintään 2 kirjainta ja jos syötit päivämäärän, että se on oikeassa muodossa (esimerkiksi 1.2.2020 tai 05.04.2021 kelpaavat)"
+        return render_template("tehtava/uusi.html", form = form, virheviesti=virheviesti, vanhatAiheet=Kayttaja.hae_aiheet(current_user.id))
 
     tehtava = Tehtava(request.form.get("nimi"))
     tehtava.valmis = form.valmis.data
     tehtava.kayttajaid = current_user.id
     tehtava.kuvaus = form.kuvaus.data
     tehtava.pvm = form.pvm.data
+    if tehtava.pvm == None:
+        tehtava.pvm = datetime.date.today()
     uudetAiheet = form.aihe.data.split(",")
     valitutAiheet = []
 
@@ -130,7 +136,7 @@ def tehtava_luo():
 
     db.session().commit()
 
-    return redirect(url_for("tehtava_index"))
+    return render_template("tehtava/uusi.html", form=TehtavaLomake(), viesti="Tehtävä lisätty sovellukseen!")
 
 
 @app.route("/tehtava/poista/<tehtava_id>")

@@ -7,6 +7,20 @@
 <form method="POST" action="{{ url_for('tehtava_luo') }}">
 
     <table>
+        {% if virheviesti is defined %}
+        <tr>
+
+            <td style="color:red; font: bold;">Virhe</td>
+            <td>{{ virheviesti }}</td>
+        </tr>
+        {% endif %}
+        {% if viesti is defined %}
+        <tr>
+
+            <td></td>
+            <td style="color:green; font: bold; font-size: 24px;">{{ viesti }}</td>
+        </tr>
+        {% endif %}
         <tr>
             <td>
                 {{ form.nimi.label }}
@@ -41,7 +55,7 @@
         </tr>
         <tr>
             <td>
-            Valitse aiheet
+            <b>Valitse aiheet</b>
             </td>
             <td>
             {% for aihe in vanhatAiheet %}
@@ -54,7 +68,7 @@
         </tr>
         <tr>
             <td>
-                Tai lisää uusia, erotettuna pilkulla, esimerkiksi: koulu,matematiikka
+                <b>Tai lisää uusia</b>, erotettuna pilkulla, esimerkiksi: koulu,matematiikka
             </td>
             <td>
                 {{ form.aihe }}
