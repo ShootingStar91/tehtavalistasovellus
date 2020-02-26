@@ -12,6 +12,7 @@ class Tehtava(Pohja):
 
     aiheet = db.relationship('Aihe', backref='Tehtava', secondary=tehtavaAihe)
 
+
     def __init__(self, nimi):
         self.nimi = nimi
         self.valmis = False
