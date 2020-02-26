@@ -69,7 +69,7 @@ def muuta_tietoja():
     lomake = RekisteroitymisLomake(request.form)
     
     if not lomake.validate():
-        return render_template("auth/muuta_tietoja.html", form = lomake)
+        return render_template("auth/muuta_tietoja.html", lomake = lomake)
 
 
     if Kayttaja.onko_olemassa(lomake.tunnus.data):
