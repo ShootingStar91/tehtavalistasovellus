@@ -8,6 +8,9 @@ class Kayttaja(Pohja):
 
     tunnus = db.Column(db.String(144), nullable=False)
     salasana = db.Column(db.String(144), nullable=False)
+
+    tehtavat = db.relationship("Tehtava", cascade="all, delete-orphan", backref="kayttaja")
+
     def __init__(self, nimi, tunnus, salasana):
         self.nimi = nimi
         self.tunnus = tunnus

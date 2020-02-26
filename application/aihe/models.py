@@ -5,8 +5,8 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 tehtavaAihe = db.Table('tehtavaaihe',
-    db.Column('tehtavaid', db.Integer, db.ForeignKey('tehtava.id'), nullable=False),
-    db.Column('aiheid', db.Integer, db.ForeignKey('aihe.id'), nullable=False))
+    db.Column('tehtavaid', db.Integer, db.ForeignKey('tehtava.id', ondelete="CASCADE"), nullable=False),
+    db.Column('aiheid', db.Integer, db.ForeignKey('aihe.id', ondelete="CASCADE"), nullable=False))
 
 class Aihe(Pohja):
 
