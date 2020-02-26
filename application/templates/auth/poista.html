@@ -1,14 +1,22 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <div style="margin-top: 50px; margin-left: 100px; background-color:rgb(187, 197, 211); padding: 20px; max-width: 700px; border-radius: 20px;">
-    <h2 style="margin-left: 50px; color: red;">Käyttäjän poistaminen</h2>
-    <div style="max-width: 700px; word-wrap: break-word; margin: 50px; text-align: justify;">
-      <p>
-        Haluatko varmasti poistaa käyttäjän ja kaiken siihen liittyvän tiedon? Poistamista ei voi peruuttaa.
-    </p>
-    <form method="POST" action="{{ url_for('auth_poista') }}"><input type="submit" value="Poista"\></form>
-    </div>
-  </div>
-    
-{% endblock %}
+
+<h3 style="margin-left: 100px; margin-top: 50px; color: red">Haluatko varmasti poistaa tunnuksesi ja kaikki siihen liittyvät tiedot (tehtävät ja aiheet) sovelluksesta? Toimintoa ei voi peruuttaa</h3>
+
+<table class="lomake" style="font-size: 24px; margin: 60px;">
+    <tr>
+        <form method="POST" action="{{ url_for('poista_tili') }}">
+        <td>
+            <input type="submit" value="Poista tili"/>
+        </td>
+    </form>
+        <td>
+            <a href="{{ url_for('auth_hallinta') }}">Peruuta</a>
+        </td>
+    </tr>
+</table>
+
+
+
+{% endblock %} 

@@ -97,6 +97,7 @@ def tehtava_luo():
     tehtava.kayttajaid = current_user.id
     tehtava.kuvaus = form.kuvaus.data
     tehtava.pvm = form.pvm.data
+
     if tehtava.pvm == None:
         tehtava.pvm = datetime.date.today()
     uudetAiheet = form.aihe.data.split(",")
@@ -136,7 +137,9 @@ def tehtava_luo():
 
     db.session().commit()
 
-    return render_template("tehtava/uusi.html", form=TehtavaLomake(), viesti="Tehtävä lisätty sovellukseen!")
+    vanhatAiheet = Kayttaja.hae_aiheet(current_user.id)
+
+    return render_template("tehtava/uusi.html", form=form, vanhatAiheet = vanhatAiheet, viesti="Tehtävä lisätty sovellukseen!")
 
 
 @app.route("/tehtava/poista/<tehtava_id>")

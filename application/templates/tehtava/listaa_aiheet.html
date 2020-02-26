@@ -2,7 +2,16 @@
 
 {% block body %}
 {% if aiheet is defined %}
-  <table>
+
+<style>
+  th, td, tr {
+    padding: 10px;
+    border-style:groove;
+  }
+</style>
+<h3 style="margin-left: 100px; margin-top: 50px;">Omat aiheesi sovelluksessa</h3>
+
+  <table style="margin-left: 100px; margin-top: 50px; margin-bottom: 100px; font-size: 22px;">
     <tr>
         <th>Aihe</th>
     </tr>
@@ -14,6 +23,6 @@
   </table>
 
   {% else %}
-  <p><b>Sinulla ei ole yhtään aihetta sovelluksessa!</b></p>
+  <h3 style="margin-left: 100px; margin-top: 50px;">Sinulla ei ole yhtään aihetta sovelluksessa</h3>
   {% endif %}
 {% endblock %}

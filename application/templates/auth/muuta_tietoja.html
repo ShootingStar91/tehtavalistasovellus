@@ -3,31 +3,24 @@
 
 {% block body %}
 
-<element class="lomake">
-<h3 style="margin-left: 100px; margin-top: 50px;">Rekisteröidy</h3>
 
-<form method="POST" action="{{ url_for('auth_rekisteroidy') }}">
+<element class="lomake">
+    <h3 style="margin-left: 100px; margin-top: 50px;">Muuta tilin tietoja</h3>
+
+<form method="POST" action="{{ url_for('muuta_tietoja') }}">
   <table class="lomake">
-    {% if error is defined %}
-    <tr>
-      <td></td>
-      <td>
-        <p style="color: red"><b>{{ error }}</b></p>
-      </td>
-    </tr>
-    {% endif %}
     <tr>
         <td>
-      {{ form.tunnus.label }}
+      {{ lomake.tunnus.label }}
         </td>
         <td>
-      {{ form.tunnus }}
+      {{ lomake.tunnus }}
         </td>
-        {% if (form.tunnus.errors is defined) and form.tunnus.errors %}
+        {% if (lomake.tunnus.errors is defined) and lomake.tunnus.errors %}
 
         <td>
           <ul>
-              {% for error in form.tunnus.errors %}
+              {% for error in lomake.tunnus.errors %}
               <li>{{ error }}</li>
               {% endfor %}
           </ul>
@@ -37,16 +30,16 @@
       <tr>
         <tr>
             <td>
-          {{ form.nimi.label }}
+          {{ lomake.nimi.label }}
             </td>
             <td>
-          {{ form.nimi }}
+          {{ lomake.nimi }}
             </td>
-            {% if (form.nimi.errors is defined) and form.nimi.errors %}
+            {% if (lomake.nimi.errors is defined) and lomake.nimi.errors %}
 
             <td>
               <ul>
-                  {% for error in form.nimi.errors %}
+                  {% for error in lomake.nimi.errors %}
                   <li>{{ error }}</li>
                   {% endfor %}
               </ul>
@@ -56,15 +49,15 @@
           </tr>
           <tr>
               <td>
-	{{ form.salasana.label }}
+	{{ lomake.salasana.label }}
       </td>
       <td>
-	{{ form.salasana }}
+	{{ lomake.salasana }}
       </td>
-      {% if (form.salasana.errors is defined) and form.salasana.errors %}
+      {% if (lomake.salasana.errors is defined) and lomake.salasana.errors %}
       <td>
         <ul>
-            {% for error in form.salasana.errors %}
+            {% for error in lomake.salasana.errors %}
             <li>{{ error }}</li>
             {% endfor %}
         </ul>
@@ -75,7 +68,7 @@
     <tr>
       <td></td>
       <td colspan="2">
-	<input type="submit" value="Rekisteröidy"/>
+	<input type="submit" value="Muuta tietoja"/>
       </td>
     </tr>
 </form>

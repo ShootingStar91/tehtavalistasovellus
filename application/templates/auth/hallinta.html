@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h3 style="margin-left: 100px; margin-top: 50px;">Tilin hallinta</h3>
+
+<table style="font-size: 20px; margin-left: 100px; margin-top: 40px;">
+    <tr>
+        <td>
+            <a href="{{ url_for('muuta_tietoja') }}">Muuta tilin tietoja</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="{{ url_for('poista_tili') }}">Poista tili ja kaikki siihen liittyvät tiedot sovelluksesta</a>
+        </td>
+    </tr>
+    <tr>
+        {% if admin %}
+        <td>
+            <p>Ylläpitäjän tilastot: Sovelluksen käyttäjillä on keskimäärin {{ tehtavia_keskimaarin }} tehtävää sovelluksessa.</p>
+        </td>
+        {% endif %}
+    </tr>
+</table>
+
+
+
+{% endblock %} 

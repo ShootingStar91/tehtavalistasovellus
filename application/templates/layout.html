@@ -75,7 +75,7 @@
               <a class="nav-link" href="{{ url_for('tehtava_lomake') }} ">Lisää tehtävä</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('tilastot_index') }} ">Tilastot</a>
+              <a class="nav-link" href="{{ url_for('auth_hallinta') }} ">Tunnuksen hallinta</a>
             </li>
             {% if current_user.is_authenticated %}
             <li>

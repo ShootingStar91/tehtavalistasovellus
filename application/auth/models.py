@@ -44,7 +44,16 @@ class Kayttaja(Pohja):
 
         return aiheet
 
+    @staticmethod
+    def onko_olemassa(tunnus):
 
+        kysely = text("SELECT * FROM kayttaja WHERE tunnus = :tunnus").params(tunnus=tunnus)
+
+        tulos = db.engine.execute(kysely).first()
+
+        return tulos != None
+
+    ''' TÄMÄ POISTETAAN LOPUKSI
     @staticmethod
     def hae_kayttajat_joilla_tehtavia():
 
@@ -57,9 +66,30 @@ class Kayttaja(Pohja):
         for rivi in tulos:
             kayttajat.append({"nimi":rivi[0], "tehtavanimi":"tyhjä"})
 
-        return kayttajat
+        return kayttajat '''
 
-    # Kirjastojen vaatimat metodit
+    @staticmethod
+    def hae_tehtavien_keskiarvo():
+
+        kysely = text(
+            "SELECT AVG(maara) FROM ("
+            " SELECT COUNT(kayttajaid) AS maara FROM tehtava GROUP BY kayttajaid"
+            ") as keskiarvo")
+        
+        tulos = db.engine.execute(kysely).first()[0]
+
+        return round(tulos, 2)
+
+
+    @staticmethod
+    def muuta_tietoja(id, nimi, tunnus, salasana):
+        
+        kysely = text("UPDATE kayttaja SET (nimi, tunnus, salasana) ="
+                      " (:nimi, :tunnus, :salasana) WHERE kayttaja.id = :id").params(id=id, nimi=nimi, tunnus=tunnus,
+                      salasana=salasana)
+
+        db.engine.execute(kysely)
+
     def get_id(self):
         return self.id
 
