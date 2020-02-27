@@ -2,19 +2,16 @@
 
 Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tilasta.
 
-**Tilanne 26.2.2020**
+**Tilanne 27.2.2020**
 
-+ Tilastot-sivu on korvattu Tilin hallinta -sivulla, josta tunnuksen tietoja voi muuttaa ja sen voi poistaa (ei välttämättä toimi herokussa (postgresql) vielä, paikallisesti kyllä)
++ Tilastot-sivu on korvattu Tilin hallinta -sivulla, josta tunnuksen tietoja voi muuttaa ja sen voi poistaa
   + Admin näkee sivulla montako tehtävää käyttäjillä on keskimäärin
-  + Adminin linkki josta näki kaikkien käyttäjien tehtävät poistettu pysyvästi
-+ User storyjä ei vielä päivitetty eikä muutakaan dokumentaatiota eli alla näkyvä rakennekin on vanhentunut
-
+  + Herokussa PostgreSQL:n kanssa ei vielä toimi kaikkien tietojen poisto sovelluksesta.
++ Käyttäjätapauksia päivitetty
 
 ___
 
 ### Projektin nykyinen rakenne
-
-**Kansiot** lihavoituna, *python-tiedostot* kursivoituna
 
 + **tehtavalistasovellus**
   + *run.py*
@@ -38,14 +35,16 @@ ___
     + **templates**
       + index.html
       + layout.html
+      + muuta_tietoja.html
+      + poista.html
       + **auth**
         + kirjautumislomake.html
         + rekisteroitymislomake.html
+        + hallinta.html
       + **tehtava**
+        + index.html
         + list.html
         + uusi.html
-        + tilastot.html
-        + listaa_aiheet.html
         + listaa_kayttajat.html
   + **documentation**
     + kayttotapaukset.md
