@@ -71,9 +71,9 @@ def muuta_tietoja():
     if not lomake.validate():
         return render_template("auth/muuta_tietoja.html", lomake = lomake)
 
-
-    if Kayttaja.onko_olemassa(lomake.tunnus.data):
-        return render_template("auth/muuta_tietoja.html", error = "Tunnus on jo käytössä")
+    
+    if lomake.tunnus.data != Kayttaja.query.filter_by(id=current_user.id).first().tunnus and Kayttaja.onko_olemassa(lomake.tunnus.data):
+        return render_template("auth/muuta_tietoja.html", lomake = lomake, error = "Tunnus on jo käytössä")
 
     
     Kayttaja.muuta_tietoja(current_user.id, lomake.nimi.data, lomake.tunnus.data, lomake.salasana.data)

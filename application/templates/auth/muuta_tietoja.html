@@ -6,7 +6,9 @@
 
 <element class="lomake">
     <h3 style="margin-left: 100px; margin-top: 50px;">Muuta tilin tietoja</h3>
-
+{% if error is defined %}
+    <h3 style="margin-left: 100px; margin-top: 50px; color: red">{{ error }}</h3>
+{% endif %}
 <form method="POST" action="{{ url_for('muuta_tietoja') }}">
   <table class="lomake">
     <tr>
