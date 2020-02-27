@@ -12,7 +12,7 @@ class Aihe(Pohja):
 
     __tablename__ = "aihe"
 
-    tehtavat = db.relationship('Tehtava', secondary=tehtavaAihe, back_populates='Aihe', viewonly=True)
+    tehtavat = db.relationship('Tehtava', secondary=tehtavaAihe, backref='Aihe', viewonly=True)
 
     def __init__(self, nimi):
         self.nimi = nimi
