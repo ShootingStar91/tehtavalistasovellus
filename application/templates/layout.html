@@ -73,11 +73,11 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('tehtava_lomake') }} ">Lisää tehtävä</a>
-            </li>
+            </li>            
+            {% if current_user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('auth_hallinta') }} ">Tunnuksen hallinta</a>
             </li>
-            {% if current_user.is_authenticated %}
             <li>
               <a class="nav-link" href="{{ url_for('auth_uloskirjaudu') }}">Kirjautuneena: <b>{{ current_user.nimi }}</b> (Kirjaudu ulos)</a></a>
             </li>

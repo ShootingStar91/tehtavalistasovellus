@@ -92,7 +92,7 @@ def poista_tili():
 
     logout_user()
 
-    Kayttaja.query.filter_by(id=nykyinen_id).delete()
+    Kayttaja.poista_tiedot(nykyinen_id)
 
     db.session.commit()
 

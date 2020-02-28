@@ -7,7 +7,6 @@ Pekka haluaa tehdä seuraavia asioita sovelluksella:
 
 + Lisätä tehtäviin aiheita
 + Asettaa lisäämäänsä tehtävään deadlinen
-
 + Katsoa mitä tehtäviä hän on aiemmin lisännyt
 + Pekka haluaa tarkastella niitä tehtäviä, joita ei ole vielä saanut valmiiksi, järjestettynä päivämäärän mukaan
 + Pekka haluaa katsella tiettyyn aiheeseen liittyviä tehtäviä tietyltä ajanjaksolta

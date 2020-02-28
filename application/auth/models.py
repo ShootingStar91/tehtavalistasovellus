@@ -67,9 +67,8 @@ class Kayttaja(Pohja):
         kayttajat = []
         tulos = db.engine.execute(stmt)
         for rivi in tulos:
-            kayttajat.append({"nimi":rivi[0], "tehtavanimi":"tyhjä"})
 
-        return kayttajat '''
+    '''
 
     @staticmethod
     def hae_tehtavien_keskiarvo():
@@ -92,6 +91,34 @@ class Kayttaja(Pohja):
                       salasana=salasana)
 
         db.engine.execute(kysely)
+
+    @staticmethod
+    def poista_tiedot(kayttajaid):
+        
+        # Käyttäjään liittyvät aiheet talteen
+        kysely = text("SELECT aihe.id FROM aihe"
+                    " JOIN tehtavaaihe ON aihe.id = tehtavaaihe.aiheid"
+                    " JOIN tehtava ON tehtavaaihe.tehtavaid = tehtava.id"
+                    " WHERE tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
+        aihelista = db.engine.execute(kysely)
+        db.engine.connect()
+
+        kysely = text("DELETE FROM tehtavaaihe "
+                    " WHERE tehtavaaihe.tehtavaid = "
+                    " (SELECT tehtavaid FROM tehtava "
+                    " WHERE tehtava.kayttajaid = :kayttajaid)").params(kayttajaid=kayttajaid)
+        db.engine.execute(kysely)
+
+        kysely = text("DELETE FROM tehtava WHERE tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
+        db.engine.execute(kysely)
+
+        kysely = text("DELETE FROM kayttaja WHERE kayttaja.id = :kayttajaid").params(kayttajaid=kayttajaid)
+        db.engine.execute(kysely)
+
+        for aiheid in aihelista:
+            Aihe.query.filter(Aihe.id==aiheid)
+            db.session().commit()
+
 
     def get_id(self):
         return self.id

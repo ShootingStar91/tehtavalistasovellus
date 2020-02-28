@@ -5,7 +5,7 @@ from application.tehtava.forms import TehtavaLomake, TehtavaHakuLomake
 from application.auth.models import Kayttaja
 from application.aihe.models import Aihe, tehtavaAihe
 from application import app, db, login_required
-from sqlalchemy.sql import text
+from sqlalchemy.sql import text, exists
 import datetime
 
 @app.route("/tehtava", methods=["GET", "POST"])
@@ -14,11 +14,19 @@ def tehtava_index():
     form = TehtavaHakuLomake(request.form)
 
     if request.method == "GET":
-        return render_template("tehtava/index.html", form=form)
+        return render_template("tehtava/index.html", form=form, 
+        vanhatAiheet=Kayttaja.hae_aiheet(current_user.id))
 
     valmius = form.valmis.data
 
     query = db.session().query(Tehtava).filter_by(kayttajaid=current_user.id)
+
+    checkboxit = request.form.getlist("vanhaAihe")
+
+    aiheet = []
+
+    for checkbox in checkboxit:
+        aiheet.append(int(checkbox))
 
     if valmius=='valmiit':
         query = query.filter_by(valmis=True)
@@ -40,7 +48,13 @@ def tehtava_index():
         query = query.order_by(Tehtava.pvm)
     elif (form.jarjestys.data=='laskeva'):
         query = query.order_by(Tehtava.pvm.desc())
+
+    if len(aiheet) > 0:
+        query = query.join(Aihe, Tehtava.aiheet).filter(Aihe.id.in_(aiheet))
+
+
     tehtavalista = query.all()
+
 
     if len(tehtavalista) == 0:
         return render_template("tehtava/list.html")
@@ -96,6 +110,8 @@ def tehtava_luo():
     tehtava.valmis = form.valmis.data
     tehtava.kayttajaid = current_user.id
     tehtava.kuvaus = form.kuvaus.data
+
+
     tehtava.pvm = form.pvm.data
 
     if tehtava.pvm == None:
@@ -139,7 +155,7 @@ def tehtava_luo():
 
     vanhatAiheet = Kayttaja.hae_aiheet(current_user.id)
 
-    return render_template("tehtava/uusi.html", form=form, vanhatAiheet = vanhatAiheet, viesti="Tehtävä lisätty sovellukseen!")
+    return render_template("tehtava/uusi.html", form=TehtavaLomake(), vanhatAiheet = vanhatAiheet, viesti="Tehtävä lisätty sovellukseen!")
 
 
 @app.route("/tehtava/poista/<tehtava_id>")
@@ -151,21 +167,3 @@ def tehtava_poista(tehtava_id):
     db.session().commit()
 
     return redirect(url_for("tehtava_index"))
-
-@app.route("/tilastot/")
-@login_required(role="ANY")
-def tilastot_index():
-    return render_template("/tehtava/tilastot.html")
-
-@app.route("/tehtava/listaa_aiheet/", methods=["GET"])
-@login_required(role="ANY")
-def listaa_aiheet():
-    aiheet = Kayttaja.hae_aiheet(current_user.id)
-    return render_template("tehtava/listaa_aiheet.html", aiheet=aiheet)
-
-@app.route("/tehtava/listaa_kayttajat/", methods=["GET"])
-def listaa_kayttajat_joilla_tehtavia():
-    tulos = Kayttaja.hae_kayttajat_joilla_tehtavia()
-
-    return render_template("tehtava/listaa_kayttajat.html", kayttajat=tulos)
-

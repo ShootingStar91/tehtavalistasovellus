@@ -11,6 +11,17 @@
             <td style="padding-top: 30px;">{{ form.valmis }}</td>
         </tr>
         <tr>
+            <td><b>Näytä vain aiheet</b></td>
+            <td>
+                {% for aihe in vanhatAiheet %}
+                <span style="margin-right: 20px;">
+                    <input type="checkbox" name="vanhaAihe" value="{{ aihe.id }}">
+                    <label for=vanhaAihe>{{ aihe.nimi }}</label>
+                </span>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
             <td>{{ form.jarjestys.label }}</td>
             <td>{{ form.jarjestys }}</td>
         </tr>
