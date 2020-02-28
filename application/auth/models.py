@@ -114,8 +114,8 @@ class Kayttaja(Pohja):
         kysely = text("DELETE FROM kayttaja WHERE kayttaja.id = :kayttajaid").params(kayttajaid=kayttajaid)
         db.engine.execute(kysely)
 
-        for aiheid in aihelista:
-            Aihe.query.filter(Aihe.id==aiheid).delete()
+        for rivi in aihelista:
+            Aihe.query.filter(Aihe.id==rivi["aiheid"]).delete()
             db.session().commit()
 
 
