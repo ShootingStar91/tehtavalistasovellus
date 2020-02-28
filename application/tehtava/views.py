@@ -18,40 +18,27 @@ def tehtava_index():
         vanhatAiheet=Kayttaja.hae_aiheet(current_user.id))
 
     valmius = form.valmis.data
-
-    query = db.session().query(Tehtava).filter_by(kayttajaid=current_user.id)
+    kysely = db.session().query(Tehtava).filter_by(kayttajaid=current_user.id)
 
     checkboxit = request.form.getlist("vanhaAihe")
-
     aiheet = []
-
     for checkbox in checkboxit:
         aiheet.append(int(checkbox))
 
-    if valmius=='valmiit':
-        query = query.filter_by(valmis=True)
-    elif valmius=='kesken':
-        query = query.filter_by(valmis=False)
-    
-    alkupvm = form.alkupvm.data
-    loppupvm = form.loppupvm.data
+    if valmius=='valmiit': kysely = query.filter_by(valmis=True)
+    elif valmius=='kesken': kysely = query.filter_by(valmis=False)
 
-    if alkupvm == "" or alkupvm is None:
-        alkupvm = datetime.date(1900, 1, 1)
-    if loppupvm == "" or loppupvm is None:
-        loppupvm = datetime.date(2999, 1, 1)
-
+    alkupvm, loppupvm = form.alkupvm.data, form.loppupvm.data
+    if alkupvm == "" or alkupvm is None: alkupvm = datetime.date(1900, 1, 1)
+    if loppupvm == "" or loppupvm is None: loppupvm = datetime.date(2999, 1, 1)
     loppupvm += datetime.timedelta(days=1)
+    kysely = query.filter(Tehtava.pvm.between(alkupvm, loppupvm))
 
-    query = query.filter(Tehtava.pvm.between(alkupvm, loppupvm))
-    if (form.jarjestys.data=='nouseva'):
-        query = query.order_by(Tehtava.pvm)
-    elif (form.jarjestys.data=='laskeva'):
-        query = query.order_by(Tehtava.pvm.desc())
+    if (form.jarjestys.data=='nouseva'): kysely = query.order_by(Tehtava.pvm)
+    elif (form.jarjestys.data=='laskeva'): kysely = query.order_by(Tehtava.pvm.desc())
 
     if len(aiheet) > 0:
-        query = query.join(Aihe, Tehtava.aiheet).filter(Aihe.id.in_(aiheet))
-
+        kysely = query.join(Aihe, Tehtava.aiheet).filter(Aihe.id.in_(aiheet))
 
     tehtavalista = query.all()
 
@@ -66,15 +53,16 @@ def tehtava_index():
 @login_required(role="ADMIN")
 def tehtava_kaikki():
 
-    stmt = text("SELECT tehtava.nimi, tehtava.kuvaus, tehtava.pvm, tehtava.valmis, tehtava.id"
+    kysely = text("SELECT tehtava.nimi, tehtava.kuvaus, tehtava.pvm, tehtava.valmis, tehtava.id"
                 " FROM tehtava")
     
-    tulos = db.engine.execute(stmt)
+    tulos = db.engine.execute(kysely)
 
     tehtavalista = []
     for rivi in tulos:
         tehtavalista.append({"nimi":rivi[0], "kuvaus":rivi[1], "pvm":str(rivi[2]), "valmis":rivi[3], 
                             "id":rivi[4]})
+
     if len(tehtavalista)==0: return render_template("tehtava/list.html")
 
     return render_template("tehtava/list.html", tehtavat=tehtavalista)
@@ -104,25 +92,18 @@ def tehtava_luo():
     virheviesti = ""
     if not form.validate():
         virheviesti="Tarkista, että tehtävän nimessä on 2-144 merkkiä ja jos syötit päivämäärän, että se on oikeassa muodossa (esimerkiksi 1.2.2020 tai 05.04.2021 kelpaavat)"
-        return render_template("tehtava/uusi.html", form = form, virheviesti=virheviesti, vanhatAiheet=Kayttaja.hae_aiheet(current_user.id))
+        return render_template("tehtava/uusi.html", form=form, virheviesti=virheviesti, vanhatAiheet=Kayttaja.hae_aiheet(current_user.id))
 
     tehtava = Tehtava(request.form.get("nimi"))
-    tehtava.valmis = form.valmis.data
-    tehtava.kayttajaid = current_user.id
-    tehtava.kuvaus = form.kuvaus.data
+    tehtava.valmis, tehtava.kayttajaid = form.valmis.data, current_user.id
+    tehtava.kuvaus, tehtava.pvm = form.kuvaus.data, form.pvm.data
 
-
-    tehtava.pvm = form.pvm.data
-
-    if tehtava.pvm == None:
-        tehtava.pvm = datetime.date.today()
+    if tehtava.pvm == None: tehtava.pvm = datetime.date.today()
     uudetAiheet = form.aihe.data.split(",")
     valitutAiheet = []
-
     vanhatAiheet = Kayttaja.hae_aiheet(current_user.id)
 
     checkboxit = request.form.getlist("vanhaAihe")
-
     for checkbox in checkboxit:
         valitutAiheet.append(Aihe.query.filter_by(id=int(checkbox)).first().nimi)
  
@@ -153,9 +134,7 @@ def tehtava_luo():
 
     db.session().commit()
 
-    vanhatAiheet = Kayttaja.hae_aiheet(current_user.id)
-
-    return render_template("tehtava/uusi.html", form=TehtavaLomake(), vanhatAiheet = vanhatAiheet, viesti="Tehtävä lisätty sovellukseen!")
+    return render_template("tehtava/uusi.html", form=TehtavaLomake(), vanhatAiheet = Kayttaja.hae_aiheet(current_user.id), viesti="Tehtävä lisätty sovellukseen!")
 
 
 @app.route("/tehtava/poista/<tehtava_id>")

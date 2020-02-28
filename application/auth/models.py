@@ -21,11 +21,11 @@ class Kayttaja(Pohja):
     # Hae käyttäjän omat tehtävät
     @staticmethod
     def hae_tehtavat(kayttajaid):
-        stmt = text("SELECT tehtava.nimi, tehtava.kuvaus, tehtava.pvm, tehtava.valmis, tehtava.id"
+        kysely = text("SELECT tehtava.nimi, tehtava.kuvaus, tehtava.pvm, tehtava.valmis, tehtava.id"
                     " FROM tehtava WHERE"
                     " tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
 
-        tulos = db.engine.execute(stmt)
+        tulos = db.engine.execute(kysely)
 
         palautus = []
         for rivi in tulos:
@@ -37,13 +37,13 @@ class Kayttaja(Pohja):
     @staticmethod
     def hae_aiheet(kayttajaid):
 
-        stmt = text("SELECT DISTINCT aihe.nimi, aihe.id FROM aihe"
+        kysely = text("SELECT DISTINCT aihe.nimi, aihe.id FROM aihe"
 		    " LEFT JOIN tehtavaaihe ON aihe.id = tehtavaaihe.aiheid"
 		    " LEFT JOIN tehtava ON tehtavaaihe.tehtavaid = tehtava.id"
 		    " WHERE tehtava.kayttajaid = :kayttaja_id").params(kayttaja_id=kayttajaid)
 
         aiheet = []
-        tulos = db.engine.execute(stmt)
+        tulos = db.engine.execute(kysely)
         for rivi in tulos:
     	    aiheet.append({"nimi":rivi[0], "id":rivi[1]})
 
@@ -58,19 +58,6 @@ class Kayttaja(Pohja):
 
         return tulos != None
 
-    ''' TÄMÄ POISTETAAN LOPUKSI
-    @staticmethod
-    def hae_kayttajat_joilla_tehtavia():
-
-        stmt = text("SELECT DISTINCT kayttaja.nimi FROM kayttaja"
-                    " LEFT JOIN tehtava ON tehtava.kayttajaid = kayttaja.id"
-                    " GROUP BY kayttaja.nimi"
-                    " HAVING COUNT(tehtava.id) > 0")
-        kayttajat = []
-        tulos = db.engine.execute(stmt)
-        for rivi in tulos:
-
-    '''
 
     @staticmethod
     def hae_aiheiden_maara(kayttajaid):
@@ -113,7 +100,8 @@ class Kayttaja(Pohja):
     @staticmethod
     def poista_tiedot(kayttajaid):
         
-        # Käyttäjään liittyvät aiheet talteen
+        # Käyttäjään liittyvät aiheet talteen, koska ensin poistettava liitostaulusta
+        # ja aiheen omistaja on tiedossa vain liitostaulun kautta
         kysely = text("SELECT aihe.id as id, aihe.nimi as nimi FROM aihe"
                     " JOIN tehtavaaihe ON aihe.id = tehtavaaihe.aiheid"
                     " JOIN tehtava ON tehtavaaihe.tehtavaid = tehtava.id"

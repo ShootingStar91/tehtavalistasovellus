@@ -31,15 +31,15 @@ def auth_rekisteroidy():
     if request.method == "GET":
         return render_template("auth/rekisteroitymislomake.html", form = RekisteroitymisLomake())
 
-    lomake = RekisteroitymisLomake(request.form)
+    form = RekisteroitymisLomake(request.form)
 
-    if not lomake.validate():
-        return render_template("/auth/rekisteroitymislomake.html", form=lomake)
+    if not form.validate():
+        return render_template("/auth/rekisteroitymislomake.html", form=form)
 
     if Kayttaja.onko_olemassa(lomake.tunnus.data):
-        return render_template("/auth/rekisteroitymislomake.html", form=lomake, error="Tunnus on jo käytössä")
+        return render_template("/auth/rekisteroitymislomake.html", form=form, error="Tunnus on jo käytössä")
 
-    uusiKayttaja = Kayttaja(lomake.nimi.data, lomake.tunnus.data, lomake.salasana.data)
+    uusiKayttaja = Kayttaja(form.nimi.data, form.tunnus.data, form.salasana.data)
 
     db.session().add(uusiKayttaja)
     db.session().commit()
@@ -65,20 +65,17 @@ def auth_hallinta():
 @login_required
 def muuta_tietoja():
     if request.method == "GET":
-        return render_template("auth/muuta_tietoja.html", lomake = RekisteroitymisLomake())
+        return render_template("auth/muuta_tietoja.html", form = RekisteroitymisLomake())
     
-    lomake = RekisteroitymisLomake(request.form)
+    form = RekisteroitymisLomake(request.form)
     
-    if not lomake.validate():
-        return render_template("auth/muuta_tietoja.html", lomake = lomake)
+    if not form.validate():
+        return render_template("auth/muuta_tietoja.html", form = form)
 
-    
-    if lomake.tunnus.data != Kayttaja.query.filter_by(id=current_user.id).first().tunnus and Kayttaja.onko_olemassa(lomake.tunnus.data):
-        return render_template("auth/muuta_tietoja.html", lomake = lomake, error = "Tunnus on jo käytössä")
+    if form.tunnus.data != Kayttaja.query.filter_by(id=current_user.id).first().tunnus and Kayttaja.onko_olemassa(lomake.tunnus.data):
+        return render_template("auth/muuta_tietoja.html", form = form, error = "Tunnus on jo käytössä")
 
-    
-    Kayttaja.muuta_tietoja(current_user.id, lomake.nimi.data, lomake.tunnus.data, lomake.salasana.data)
-    
+    Kayttaja.muuta_tietoja(current_user.id, form.nimi.data, form.tunnus.data, form.salasana.data)
     
     return redirect(url_for("index"))
     
@@ -94,7 +91,7 @@ def poista_tili():
     logout_user()
 
     Kayttaja.poista_tiedot(nykyinen_id)
-
+    
     db.session.commit()
 
     return redirect(url_for("index"))
