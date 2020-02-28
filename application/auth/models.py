@@ -88,7 +88,13 @@ class Kayttaja(Pohja):
 
             return round(tulos, 2)
         
-        return 0
+        kysely = text("SELECT COUNT(*) FROM tehtava")
+        tehtavia = db.engine.execute(kysely).first()[0]
+        
+        kysely = text("SELECT COUNT(*) FROM kayttaja")
+        kayttajia = db.engine.execute(kysely).first()[0]
+
+        return tehtavia*1.00/kayttajia
 
 
     @staticmethod
