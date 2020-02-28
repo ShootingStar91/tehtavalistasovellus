@@ -16,9 +16,14 @@
         </td>
     </tr>
     <tr>
+        <td>
+            <p>Sinulla on sovelluksessa {{ aihemaara }} aihetta.</p>
+        </td>
+    </tr>
+    <tr>
         {% if admin %}
         <td>
-            <p>Ylläpitäjän tilastot: Sovelluksen käyttäjillä on keskimäärin {{ tehtavia_keskimaarin }} tehtävää sovelluksessa.</p>
+            <p>Ylläpitäjän tilastot: Sovelluksen käyttäjillä on keskimäärin {{ aihemaara }} aihetta sovelluksessa.</p>
         </td>
         {% endif %}
     </tr>
