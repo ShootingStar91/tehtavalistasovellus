@@ -36,7 +36,7 @@ CREATE TABLE tehtavaaihe (
 Pekka on matematiikan opiskelija yliopistolla. Hän käyttää tehtävälistasovellusta pitääkseen kirjaa asioista, joita hänen on arjessa muistettava hoitaa.
 Pekka haluaa tehdä seuraavia asioita sovelluksella:
 
-+ Lisätä tehtävän jossa on useita aiheita
++ Pekka haluaa lisätä tehtävän jossa on useita aiheita
 
 ```SQL
 INSERT INTO aihe (nimi) VALUES ('koulu');
@@ -56,7 +56,7 @@ INSERT INTO tehtavaaihe (tehtavaid, aiheid) VALUES (
 );
 ```
 
-+ Katsoa mitä tehtäviä hän on aiemmin lisännyt
++ Pekka haluaa katsoa mitä tehtäviä hän on aiemmin lisännyt
 
 ```SQL
 SELECT * FROM tehtava
@@ -75,6 +75,7 @@ AND tehtava.valmis = false ORDER BY pvm ASC;
 
 
 + Pekka haluaa katsella kouluun liittyviä tehtäviään vuoden 2020 tammikuulta
+
 ```SQL
 SELECT * FROM tehtava
 JOIN kayttaja ON tehtava.kayttajaid = kayttaja.id
@@ -84,6 +85,12 @@ WHERE aihe.nimi = 'koulu'
 AND tehtava.pvm BETWEEN '2020-01-01' AND '2020-01-31'
 AND kayttaja.tunnus = 'pekka';
 
+```
+
++ Pekka haluaa asettaa tehtävän tehdyksi
+
+```SQL
+UPDATE tehtava SET (valmis) = (true) WHERE tehtava.id = 4;
 ```
 
 + Pekka haluaa nähdä montako aihetta hänellä on sovelluksessa
@@ -124,7 +131,7 @@ WHERE NOT EXISTS (
 + Pekka haluaa muokata sovellukseen antamaansa nimeä, tunnusta ja salasanaa
 
 ```SQL
-UPDATE kayttaja SET (nimi, tunnus, salasana) = ('Pekka', 'pekka', 'uusiSalasana123');
+UPDATE kayttaja SET (nimi, tunnus, salasana) = ('Pekka', 'pekka', 'uusiSalasana123') WHERE kayttaja.id = 1;
 ```
 
 + Pekka haluaa poistaa tilinsä ja kaikki siihen liittyvät tiedot sovelluksesta pysyvästi
@@ -138,8 +145,8 @@ DELETE FROM kayttaja WHERE kayttaja.id = 5;
 
 DELETE FROM aihe WHERE aihe.id IN (5, 6, 8, 10, 15, 17);
 
-DELETE FROM aihe
-WHERE NOT EXISTS (
+DELETE FROM aihe WHERE NOT EXISTS 
+(
     SELECT 1 FROM tehtavaaihe WHERE tehtavaaihe.aiheid = aihe.id
 );
 ```

@@ -100,15 +100,6 @@ class Kayttaja(Pohja):
     @staticmethod
     def poista_tiedot(kayttajaid):
         
-        # Käyttäjään liittyvät aiheet talteen, koska ensin poistettava liitostaulusta
-        # ja aiheen omistaja on tiedossa vain liitostaulun kautta
-        kysely = text("SELECT aihe.id as id, aihe.nimi as nimi FROM aihe"
-                    " JOIN tehtavaaihe ON aihe.id = tehtavaaihe.aiheid"
-                    " JOIN tehtava ON tehtavaaihe.tehtavaid = tehtava.id"
-                    " WHERE tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
-        tulos = db.engine.execute(kysely)
-        db.engine.connect()
-
         kysely = text("DELETE FROM tehtavaaihe USING tehtava WHERE tehtava.id = tehtavaaihe.tehtavaid AND tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
         db.engine.execute(kysely)
 
@@ -117,14 +108,9 @@ class Kayttaja(Pohja):
 
         kysely = text("DELETE FROM kayttaja WHERE kayttaja.id = :kayttajaid").params(kayttajaid=kayttajaid)
         db.engine.execute(kysely)
-        aihelista = []
         
-        for rivi in tulos:
-            aihelista.append(rivi[0])
-
-        for aiheid in aihelista:
-            Aihe.query.filter(Aihe.id==aiheid).delete()
-            db.session().commit()
+        kysely = text("DELETE FROM aihe WHERE NOT EXISTS (SELECT 1 FROM tehtavaaihe WHERE tehtavaaihe.aiheid = aihe.id)")
+        db.engine.execute(kysely)
 
     @staticmethod
     def poista_tehtava(tehtavaid):
