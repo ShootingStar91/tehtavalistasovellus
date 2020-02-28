@@ -1,6 +1,8 @@
 from application import db
 from application.models import Pohja
 from sqlalchemy.sql import text
+from application.aihe.models import Aihe
+
 
 class Kayttaja(Pohja):
 
