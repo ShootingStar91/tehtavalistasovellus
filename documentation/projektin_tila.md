@@ -5,7 +5,6 @@
 + Sovellus toimii pääosin hyvin.
 + Tehtävää lisätessä lomake ei tyhjene. En keksinyt mikä tähän tepsisi, uuden lomakkeen luominen GET-sivua muodostaessa ei auttanut, ja jos laittoi redirectauksen render_templaten sijasta, siihen ei saanut syötettyä parametrejä mukaan (halusin näkyviin Tehtävä lisätty -tekstin). Tiedon olisi voinut kuljettaa varmaan jollain selaimen sessioilla tai tyhjentää lomakkeet javascriptillä mutten halunnut ryhtyä selvittämään näitä koska asia oli lopulta melko pieni haitta.
 + Kun tehtävän poistaa tai merkkaa valmiiksi, sovellus heittää takaisin tehtävien hakuehtolomakkeeseen. Poisto tai muutto tekee POST-pyynnön, ja en keksinyt miten saman äsken näytetyn listauksen saisi välitettyä uudestaan GET-sivulle.
-+ SQLite ei tykkää peräkkäisistä kyselyistä joita Kayttaja-luokan joissain metoideissa on ja sovellus ei tue sitä. PostgreSQL:n kanssa sovellus kuitenkin toimii mainiosti.
 + Poistamisesta tuli hieman monimutkaista kun en päässyt perille CASCADING DELETE -toiminnallisuuksista. Sain kuitenkin tehtyä poistolauseen joka poistaa aiheet joille ei jää yhtään viittausta, eli käyttämättömät aiheet poistetaan aina tehtävän poistamisen jälkeen ja kun käyttäjä poistaa kaikki tietonsa sovelluksesta.
 + Kyselyjä olisi yksinkertaistanut suuresti, jos aihe-taulussa olisi ollut viiteavain kayttaja-tauluun. Toisaalta opin ehkä enemmän kun toteutin sovelluksen ilman tätä, mutta se olisi ollut varmaankin järkevämpi toteutus jälkeenpäin mietittynä.
 
