@@ -93,7 +93,7 @@ class Kayttaja(Pohja):
             "SELECT AVG(maara) FROM ("
             " SELECT COUNT(tehtava.id) AS maara FROM tehtava"
             " RIGHT JOIN kayttaja ON kayttaja.id = tehtava.kayttajaid"
-            " GROUP BY tehtava.kayttajaid"
+            " GROUP BY kayttaja.id"
             ") AS keskiarvo")
         
         tulos = db.engine.execute(kysely).first()[0]

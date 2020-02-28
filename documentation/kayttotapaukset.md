@@ -7,7 +7,7 @@ Pekka haluaa tehdä seuraavia asioita sovelluksella:
 
 + Lisätä tehtäviä joissa on useita aiheita
 
-´´´SQL
+```SQL
 INSERT INTO aihe (nimi) VALUES ("koulu");
 
 INSERT INTO tehtava (nimi, kuvaus, pvm, valmis)
@@ -17,8 +17,7 @@ INSERT INTO tehtavaaihe (tehtavaid, aiheid) VALUES (
     (SELECT MAX(id) FROM aihe),
     (SELECT MAX(id)-1 FROM aihe)
 )
-
-´´´
+```
 
 + Asettaa lisäämäänsä tehtävään deadlinen
 + Katsoa mitä tehtäviä hän on aiemmin lisännyt
