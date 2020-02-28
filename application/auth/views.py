@@ -36,7 +36,7 @@ def auth_rekisteroidy():
     if not form.validate():
         return render_template("/auth/rekisteroitymislomake.html", form=form)
 
-    if Kayttaja.onko_olemassa(lomake.tunnus.data):
+    if Kayttaja.onko_olemassa(form.tunnus.data):
         return render_template("/auth/rekisteroitymislomake.html", form=form, error="Tunnus on jo käytössä")
 
     uusiKayttaja = Kayttaja(form.nimi.data, form.tunnus.data, form.salasana.data)
