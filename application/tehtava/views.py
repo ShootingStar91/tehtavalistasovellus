@@ -25,22 +25,22 @@ def tehtava_index():
     for checkbox in checkboxit:
         aiheet.append(int(checkbox))
 
-    if valmius=='valmiit': kysely = query.filter_by(valmis=True)
-    elif valmius=='kesken': kysely = query.filter_by(valmis=False)
+    if valmius=='valmiit': kysely = kysely.filter_by(valmis=True)
+    elif valmius=='kesken': kysely = kysely.filter_by(valmis=False)
 
     alkupvm, loppupvm = form.alkupvm.data, form.loppupvm.data
     if alkupvm == "" or alkupvm is None: alkupvm = datetime.date(1900, 1, 1)
     if loppupvm == "" or loppupvm is None: loppupvm = datetime.date(2999, 1, 1)
     loppupvm += datetime.timedelta(days=1)
-    kysely = query.filter(Tehtava.pvm.between(alkupvm, loppupvm))
+    kysely = kysely.filter(Tehtava.pvm.between(alkupvm, loppupvm))
 
-    if (form.jarjestys.data=='nouseva'): kysely = query.order_by(Tehtava.pvm)
-    elif (form.jarjestys.data=='laskeva'): kysely = query.order_by(Tehtava.pvm.desc())
+    if (form.jarjestys.data=='nouseva'): kysely = kysely.order_by(Tehtava.pvm)
+    elif (form.jarjestys.data=='laskeva'): kysely = kysely.order_by(Tehtava.pvm.desc())
 
     if len(aiheet) > 0:
-        kysely = query.join(Aihe, Tehtava.aiheet).filter(Aihe.id.in_(aiheet))
+        kysely = kysely.join(Aihe, Tehtava.aiheet).filter(Aihe.id.in_(aiheet))
 
-    tehtavalista = query.all()
+    tehtavalista = kysely.all()
 
 
     if len(tehtavalista) == 0:
