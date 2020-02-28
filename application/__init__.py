@@ -13,10 +13,6 @@ else:
 
 db = SQLAlchemy(app)
 
-
-
-# Kirjautuminen
-
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
 
@@ -74,4 +70,5 @@ def lataa_kayttaja(user_id):
 try:
     db.create_all()
 except:
+    print("Tietokannan luominen epäonnistui!")
     pass

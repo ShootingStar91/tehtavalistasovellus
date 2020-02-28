@@ -21,7 +21,7 @@ ___
 ___
 ### Käyttöohje
 
-Sovellukseen luodaan oma käyttäjätili painamalla Rekisteröidy-linkkiä ylävalikossa. Kirjautuminen ja uloskirjautuminen tapahtuu myös yläpalkista. Kirjautunut käyttäjä voi luoda omia tehtäviä Lisää tehtävä-linkin kautta. Tehtäviin täytyy laittaa vähintään nimi ja päivämäärä. Päivämäärä tulee olla muodossa dd.mm.yyyy, seuraavat kelpaa: 01.12.2020, 1.4.2021. Tehtävään voi lisätä aiheita joko aiemmin käyttäjän itse lisäämistä aiheista tai sitten lisätä uusia tekstikenttään pilkulla erotettuna, esimerkiksi: "autoilu,vapaa-aika". Tehtävien katselu tapahtuu Listaa tehtävät-linkistä yläpalkista. Tehtäviä voi merkata tehdyiksi tai poistaa listauksen oikeasta laidasta.
+Sovellukseen luodaan oma käyttäjätili painamalla Rekisteröidy-linkkiä ylävalikossa. Kirjautuminen ja uloskirjautuminen tapahtuu myös yläpalkista. Kirjautunut käyttäjä voi luoda omia tehtäviä Lisää tehtävä-linkin kautta. Tehtäviin täytyy laittaa vähintään nimi. Päivämäärä tulee olla muodossa dd.mm.yyyy, seuraavat kelpaa: 01.12.2020, 1.4.2021. Jos päivämäärää ei syötä, sen hetkinen päivämäärä tulee tehtävään automaattisesti. Tehtävään voi lisätä aiheita joko aiemmin käyttäjän itse lisäämistä aiheista tai sitten lisätä uusia tekstikenttään pilkulla erotettuna, esimerkiksi: "autoilu,vapaa-aika". Tehtävien katselu tapahtuu Listaa tehtävät-linkistä yläpalkista. Tehtäviä voi merkata tehdyiksi tai poistaa listauksen oikeasta laidasta.
 ___
 ### Heroku
 

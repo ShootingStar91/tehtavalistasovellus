@@ -10,4 +10,4 @@ Käynnistä sovellus: `python run.py`
 Käynnistä sovellus ja kirjoita osoiteriville `locahost:5000` (voi vaihdella asetuksista riippuen)
 
 ##### Heroku
-Luo Herokuun sovellus. Lataa tehtavalistasovellus sinne esimerkiksi niin, että yhdistät Herokun dashboardissa sovelluksen GitHub-repoon. Sitten pusket repoon tehtavalistasovelluksen kaikki tiedostot.
+Luo Herokuun sovellus. Lataa tehtavalistasovellus sinne esimerkiksi niin, että yhdistät Herokun dashboardissa sovelluksen GitHub-repoon. Sitten pusket repoon tehtavalistasovelluksen kaikki tiedostot. Mene Herokun dashboardista sovelluksesi asetuksiin ja lisää sovelluksen käyttöön Postgres-tietokanta.

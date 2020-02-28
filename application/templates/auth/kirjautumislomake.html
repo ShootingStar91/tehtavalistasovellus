@@ -2,13 +2,20 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{{ error }}
 <h3 style="margin-left: 100px; margin-top: 50px;">Kirjaudu</h3>
 
 <element class="lomake">
 <form method="POST" action="{{ url_for('auth_kirjaudu') }}">
   <table class="lomake">
-    <tr>
+      {% if error is defined %}
+      <tr>
+        <td></td>
+        <td>
+          <p style="color: red"><b>{{ error }}</b></p>
+        </td>
+      </tr>
+      {% endif %}
+      <tr>
       <td>
 	{{ form.tunnus.label }}
       </td>
