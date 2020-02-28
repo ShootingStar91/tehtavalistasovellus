@@ -105,10 +105,7 @@ class Kayttaja(Pohja):
         aihelista = db.engine.execute(kysely)
         db.engine.connect()
 
-        kysely = text("DELETE FROM tehtavaaihe "
-                    " WHERE tehtavaaihe.tehtavaid = "
-                    " (SELECT tehtavaid FROM tehtava "
-                    " WHERE tehtava.kayttajaid = :kayttajaid)").params(kayttajaid=kayttajaid)
+        kysely = text("DELETE FROM tehtavaaihe USING tehtava WHERE tehtava.id = tehtavaaihe.tehtavaid AND tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
         db.engine.execute(kysely)
 
         kysely = text("DELETE FROM tehtava WHERE tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
@@ -118,7 +115,7 @@ class Kayttaja(Pohja):
         db.engine.execute(kysely)
 
         for aiheid in aihelista:
-            Aihe.query.filter(Aihe.id==aiheid)
+            Aihe.query.filter(Aihe.id==aiheid).delete()
             db.session().commit()
 
 
