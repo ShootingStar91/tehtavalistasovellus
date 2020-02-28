@@ -126,6 +126,19 @@ class Kayttaja(Pohja):
             Aihe.query.filter(Aihe.id==aiheid).delete()
             db.session().commit()
 
+    @staticmethod
+    def poista_tehtava(tehtavaid):
+
+        kysely = text("DELETE FROM tehtavaaihe WHERE tehtavaaihe.tehtavaid = :tehtavaid").params(tehtavaid=tehtavaid)
+        db.engine.execute(kysely)
+
+        kysely = text("DELETE FROM tehtava WHERE tehtava.id = :tehtavaid").params(tehtavaid=tehtavaid)
+        db.engine.execute(kysely)
+
+        kysely = text("DELETE FROM aihe WHERE NOT EXISTS ("
+                      " SELECT 1 FROM tehtavaaihe WHERE tehtavaaihe.aiheid = aihe.id)")
+        db.engine.execute(kysely)
+
 
     def get_id(self):
         return self.id

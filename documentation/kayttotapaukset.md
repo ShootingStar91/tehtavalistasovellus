@@ -107,6 +107,20 @@ WHERE kayttaja.tunnus = 'pekka';
 
 ```
 
++ Pekka haluaa poistaa yhden tehtävän
+
+```SQL
+DELETE FROM tehtavaaihe WHERE tehtavaaihe.tehtavaid = 8;
+
+DELETE FROM tehtava WHERE tehtava.id = 8;
+
+DELETE FROM aihe
+WHERE NOT EXISTS (
+    SELECT 1 FROM tehtavaaihe WHERE tehtavaaihe.aiheid = aihe.id
+);
+
+```
+
 + Pekka haluaa muokata sovellukseen antamaansa nimeä, tunnusta ja salasanaa
 
 ```SQL
@@ -123,6 +137,11 @@ DELETE FROM tehtava WHERE tehtava.kayttajaid = 5;
 DELETE FROM kayttaja WHERE kayttaja.id = 5;
 
 DELETE FROM aihe WHERE aihe.id IN (5, 6, 8, 10, 15, 17);
+
+DELETE FROM aihe
+WHERE NOT EXISTS (
+    SELECT 1 FROM tehtavaaihe WHERE tehtavaaihe.aiheid = aihe.id
+);
 ```
 
 ### Ylläpitäjä nimeltä Ismo
