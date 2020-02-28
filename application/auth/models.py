@@ -87,29 +87,14 @@ class Kayttaja(Pohja):
 
 
     @staticmethod
-    def hae_aiheiden_keskiarvo():
-
-        kysely = text(
-            "SELECT AVG(maara) FROM ("
-            " SELECT COUNT(DISTINCT tehtavaaihe.aiheid) AS maara FROM aihe"
-            " JOIN tehtavaaihe ON aihe.id = tehtavaaihe.aiheid"
-            " JOIN tehtava ON tehtavaaihe.tehtavaid = tehtava.id"
-            " GROUP BY tehtava.kayttajaid"
-            ") as keskiarvo")
-        
-        tulos = db.engine.execute(kysely).first()[0]
-
-        return round(tulos, 2)
-
-
-
-    @staticmethod
     def hae_tehtavien_keskiarvo():
 
         kysely = text(
             "SELECT AVG(maara) FROM ("
-            " SELECT COUNT(kayttajaid) AS maara FROM tehtava GROUP BY kayttajaid"
-            ") as keskiarvo")
+            " SELECT COUNT(tehtava.id) AS maara FROM tehtava"
+            " RIGHT JOIN kayttaja ON kayttaja.id = tehtava.kayttajaid"
+            " GROUP BY tehtava.kayttajaid"
+            ") AS keskiarvo")
         
         tulos = db.engine.execute(kysely).first()[0]
 

@@ -58,7 +58,7 @@ def auth_hallinta():
     tehtavia_keskimaarin = Kayttaja.hae_tehtavien_keskiarvo()
     aihemaara = Kayttaja.hae_aiheiden_maara(current_user.id)
     return render_template("auth/hallinta.html", 
-        admin=admin, tehtavia_keskimaarin=tehtavia_keskimaarin, aihemaara=aihemaara)
+        admin=admin, tehtavia_keskimaarin=tehtavia_keskimaarin, aiheiden_maara=aihemaara)
 
 
 @app.route("/auth/muuta_tietoja", methods = ["GET", "POST"])
