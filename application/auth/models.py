@@ -2,6 +2,7 @@ from application import db
 from application.models import Pohja
 from sqlalchemy.sql import text
 from application.aihe.models import Aihe
+import os
 
 
 class Kayttaja(Pohja):
@@ -75,17 +76,19 @@ class Kayttaja(Pohja):
 
     @staticmethod
     def hae_tehtavien_keskiarvo():
+        if os.environ.get("HEROKU"):
+            kysely = text(
+                "SELECT AVG(maara) FROM ("
+                " SELECT COUNT(tehtava.id) AS maara FROM tehtava"
+                " RIGHT JOIN kayttaja ON kayttaja.id = tehtava.kayttajaid"
+                " GROUP BY kayttaja.id"
+                ") AS keskiarvo")
+            
+            tulos = db.engine.execute(kysely).first()[0]
 
-        kysely = text(
-            "SELECT AVG(maara) FROM ("
-            " SELECT COUNT(tehtava.id) AS maara FROM tehtava"
-            " RIGHT JOIN kayttaja ON kayttaja.id = tehtava.kayttajaid"
-            " GROUP BY kayttaja.id"
-            ") AS keskiarvo")
+            return round(tulos, 2)
         
-        tulos = db.engine.execute(kysely).first()[0]
-
-        return round(tulos, 2)
+        return 0
 
 
     @staticmethod
@@ -99,17 +102,28 @@ class Kayttaja(Pohja):
 
     @staticmethod
     def poista_tiedot(kayttajaid):
-        
-        kysely = text("DELETE FROM tehtavaaihe USING tehtava WHERE tehtava.id = tehtavaaihe.tehtavaid AND tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
-        db.engine.execute(kysely)
+        if os.environ.get("HEROKU"):
+            kysely = text("DELETE FROM tehtavaaihe USING tehtava WHERE tehtava.id = tehtavaaihe.tehtavaid AND tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
+            db.engine.execute(kysely)
 
-        kysely = text("DELETE FROM tehtava WHERE tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
-        db.engine.execute(kysely)
+            kysely = text("DELETE FROM tehtava WHERE tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
+            db.engine.execute(kysely)
+
+            kysely = text("DELETE FROM kayttaja WHERE kayttaja.id = :kayttajaid").params(kayttajaid=kayttajaid)
+            db.engine.execute(kysely)
+            
+            kysely = text("DELETE FROM aihe WHERE NOT EXISTS (SELECT 1 FROM tehtavaaihe WHERE tehtavaaihe.aiheid = aihe.id)")
+            db.engine.execute(kysely)
+
+            return
 
         kysely = text("DELETE FROM kayttaja WHERE kayttaja.id = :kayttajaid").params(kayttajaid=kayttajaid)
         db.engine.execute(kysely)
-        
-        kysely = text("DELETE FROM aihe WHERE NOT EXISTS (SELECT 1 FROM tehtavaaihe WHERE tehtavaaihe.aiheid = aihe.id)")
+        kysely = text("DELETE FROM tehtavaaihe WHERE EXISTS (SELECT 1 FROM tehtava WHERE tehtava.id = tehtavaaihe.tehtavaid AND tehtava.kayttajaid = :kayttajaid)").params(kayttajaid=kayttajaid)
+        db.engine.execute(kysely)
+        kysely = text("DELETE FROM tehtava WHERE tehtava.kayttajaid = :kayttajaid").params(kayttajaid=kayttajaid)
+        db.engine.execute(kysely)
+        kysely = text("DELETE FROM aihe WHERE NOT EXISTS (SELECT 1 FROM tehtavaaihe WHERE tehtavaaihe.aiheid = aihe.id);").params(kayttajaid=kayttajaid)
         db.engine.execute(kysely)
 
     @staticmethod
