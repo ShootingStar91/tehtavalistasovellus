@@ -21,19 +21,19 @@ ___
 
 Sovellukseen luodaan oma käyttäjätili painamalla Rekisteröidy-linkkiä ylävalikossa. Kirjautuminen ja uloskirjautuminen tapahtuu myös yläpalkista. Kirjautunut käyttäjä voi luoda omia tehtäviä Lisää tehtävä-linkin kautta. Tehtäviin täytyy laittaa vähintään nimi ja päivämäärä. Päivämäärä tulee olla muodossa dd.mm.yyyy, seuraavat kelpaa: 01.12.2020, 1.4.2021. Tehtävään voi lisätä aiheita joko aiemmin käyttäjän itse lisäämistä aiheista tai sitten lisätä uusia tekstikenttään pilkulla erotettuna, esimerkiksi: "autoilu,vapaa-aika". Tehtävien katselu tapahtuu Listaa tehtävät-linkistä yläpalkista. Tehtäviä voi merkata tehdyiksi tai poistaa listauksen oikeasta laidasta.
 ___
-### Linkit
-
 ##### Heroku
 
 + [Herokuapp](https://tehtavalistasovellus.herokuapp.com/tehtava)
-+ Testitunnus herokuun:
-  + Tunnus: taikuri54
-  + Salasana: ismo
-
++ Admin-testitunnus herokuun:
+  + __Tunnus__: taikuri54
+  + __Salasana__: ismo
+  + Voit myös luoda uuden tunnuksen ja kokeilla toimintoja sillä. Yllä mainittu testitunnus on ainoa jolla on admin-oikeudet.
+___
 ##### Dokumentaatio
 
 + [Projektin tila](https://github.com/ShootingStar91/tehtavalistasovellus/blob/master/documentation/projektin_tila.md)
 + [Käyttötapaukset](https://github.com/ShootingStar91/tehtavalistasovellus/blob/master/documentation/kayttotapaukset.md)
++ [Asennusohje](https://github.com/ShootingStar91/tehtavalistasovellus/blob/master/documentation/asennusohje.md)
 
 + Tietokantakaavio:
 

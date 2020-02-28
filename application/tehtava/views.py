@@ -134,9 +134,4 @@ def tehtava_poista(tehtava_id):
 
     Kayttaja.poista_tehtava(tehtava_id)
     
-    '''
-    tehtava = db.session().query(Tehtava).filter(Tehtava.id==tehtava_id).first()
-    db.session.delete(tehtava)
-    db.session().commit()
-    '''
     return redirect(url_for("tehtava_index"))
