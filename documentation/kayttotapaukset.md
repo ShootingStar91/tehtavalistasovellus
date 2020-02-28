@@ -2,7 +2,34 @@
 
 ### Tietokantataulun luonti
 
-Create-table lauseet
+```SQL
+CREATE TABLE kayttaja (
+    id serial PRIMARY KEY,
+    nimi VARCHAR (144),
+    tunnus VARCHAR (144),
+    salasana VARCHAR (144)
+);
+
+CREATE TABLE tehtava (
+    id serial PRIMARY KEY,
+    nimi VARCHAR (144),
+    kuvaus VARCHAR (1000),
+    valmis BOOLEAN,
+    pvm DATE,
+    kayttajaid INTEGER REFERENCES kayttaja(id)
+);
+
+CREATE TABLE aihe (
+    id serial PRIMARY KEY,
+    nimi VARCHAR (144)
+);
+
+CREATE TABLE tehtavaaihe (
+    tehtavaid INTEGER REFERENCES tehtava(id),
+    aiheid INTEGER REFERENCES aihe(id)
+);
+
+```
 
 ### Opiskelija nimeltä Pekka
 
@@ -12,8 +39,8 @@ Pekka haluaa tehdä seuraavia asioita sovelluksella:
 + Lisätä tehtävän jossa on useita aiheita
 
 ```SQL
-INSERT INTO aihe (nimi) VALUES ("koulu");
-INSERT INTO aihe (nimi) VALUES ("matematiikka");
+INSERT INTO aihe (nimi) VALUES ('koulu');
+INSERT INTO aihe (nimi) VALUES ('matematiikka');
 
 INSERT INTO tehtava (nimi, kuvaus, pvm, valmis, kayttajaid)
 VALUES ('Matikan tentti', 'Osat 3-5', '01-05-2020', false, 5);
@@ -21,12 +48,12 @@ VALUES ('Matikan tentti', 'Osat 3-5', '01-05-2020', false, 5);
 INSERT INTO tehtavaaihe (tehtavaid, aiheid) VALUES (
     (SELECT MAX(id) FROM tehtava),
     (SELECT MAX(id)-1 FROM aihe)
-)
+);
 
 INSERT INTO tehtavaaihe (tehtavaid, aiheid) VALUES (
     (SELECT MAX(id) FROM tehtava),
     (SELECT MAX(id) FROM aihe)
-)
+);
 ```
 
 + Katsoa mitä tehtäviä hän on aiemmin lisännyt
@@ -69,6 +96,17 @@ JOIN kayttaja ON tehtava.kayttajaid = kayttaja.id
 WHERE kayttaja.tunnus = 'pekka';
 ```
 
++ Pekka haluaa nähdä mitkä aiheet hänellä on sovelluksessa
+
+```SQL
+SELECT aihe.nimi FROM aihe
+JOIN tehtavaaihe ON aihe.id = tehtavaaihe.aiheid
+JOIN tehtava ON tehtavaaihe.tehtavaid = tehtava.id
+JOIN kayttaja ON tehtava.kayttajaid = kayttaja.id
+WHERE kayttaja.tunnus = 'pekka';
+
+```
+
 + Pekka haluaa muokata sovellukseen antamaansa nimeä, tunnusta ja salasanaa
 
 ```SQL
@@ -99,7 +137,5 @@ SELECT AVG(maara) FROM
     SELECT COUNT(tehtava.id) AS maara FROM tehtava
     RIGHT JOIN kayttaja ON kayttaja.id = tehtava.kayttajaid
     GROUP BY kayttaja.id
-) AS keskiarvo
+) AS keskiarvo;
 ```
-
-

@@ -2,12 +2,10 @@
 
 Tässä tiedostossa pidän kirjaa tehtävälistasovellus-harjoitusprojektin tilasta.
 
-**Tilanne 27.2.2020**
+**Tilanne 28.2.2020**
 
-+ Tilastot-sivu on korvattu Tilin hallinta -sivulla, josta tunnuksen tietoja voi muuttaa ja sen voi poistaa
-  + Admin näkee sivulla montako tehtävää käyttäjillä on keskimäärin
-  + Herokussa PostgreSQL:n kanssa ei vielä toimi kaikkien tietojen poisto sovelluksesta.
-+ Käyttäjätapauksia päivitetty
++ Sovellukseen lisätty monimutkaisemmat yhteenvetokyselyt
++ Dokumentaatiota päivitetty, sovellus enää loppuhiontaa vailla
 
 ___
 
